@@ -1,0 +1,97 @@
+
+Test1
+=======
+
+- delete all
+- create example7A
+- play it, should work
+- update it to shorten 1 clue, should pass validation
+- play it, should work
+- update it to remove 1 clue, should fail validation
+- update it to remove 1 clue line, should fail validation
+- update it to remove all across lines, should fail validation
+- update it to remove blank on top line, shoule fail validation
+
+Test2
+======
+
+- delete all
+- create cw1, 7
+- leave in orig state, play it, should fail
+- update it, enter 1 blank top left, 7 across/down clues eg 1.a
+- play, should work
+
+
+Test3
+=====
+
+- delete all
+- create c, 7
+- should error
+- change to cw2
+- should work
+
+Test4
+=====
+
+- delete all
+- create example7A
+- export example7A, copy text
+- import, paste same text, should work
+- import, paste same text, change name to example7B, should create new
+- import, enter {}, should fail
+- import, enter {"name":"aaa"}, should fail
+- import, enter {"name":"aaa","maxAcross":"dd"}, should fail
+- import, enter {"name":"aaa","maxAcross":15}, should fail
+- import, enter {"name":"aaa","maxAcross":7}, should fail
+
+
+Test5
+=====
+
+- delete all
+- create example7A
+- play it, should work
+- enter DAD for 1 across
+- export, should see cellValues for DAD
+- import, change name to example7C, play, should work with DAD
+
+
+Test6
+=====
+
+- delete all
+- create example20A
+- play it, should work
+- enter some values, export
+- import using same text, change name to example20B, remove 1 value
+- play example20B, should work
+
+
+Test7
+=====
+
+- delete all
+- create example7A
+- play it, should work
+- enter DAD for 1 across
+- update it, change a clue   
+- play it, should have kept DAD from play
+
+Test8
+=====
+
+- delete all
+- create example7A
+- export and import as example7B
+- export example7A, then switch to example7B
+
+
+TODO:
+
+- when you enter blanks in update the keyboard pops up on Ipad
+   - this is auto-complete - should be fixed
+- Select All pops up on second click (not double click) on Ipad
+
+- need to support size 15
+   - done

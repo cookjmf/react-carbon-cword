@@ -1,13 +1,396 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* General */
+
+html,body {
+margin:0;
+padding:0;
+height:100%;
+font-size:13px;
+font-family: IBMPlexSans,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Crossword board container */
+
+.cw-cont {
+position: relative;
+background: #FFFFFF;
+margin: 30px 0 0 30px;
+}
+
+/* Current Clue */
+
+.cw-clues-current {
+font-size: 18px;
+color: white;
+background-color: blue;
+margin-top: 20px;  
+margin-bottom: 20px;  
+margin-left: 0px;
+margin-right: 0px;
+width: fit-content;
+padding-right: 12px;
+padding-left: 12px;
+padding-top: 6px;
+padding-bottom: 6px;
+}
+
+/* Crossword board */
+
+.cw-board-7by7 {
+position: absolute;
+z-index: 1;
+background: transparent;
+border: 1px solid #000000;
+display: grid;
+width: 300px;
+height: 300px;
+grid-template: repeat(7, 14.2857%)/repeat(7, 14.2857%); 
+list-style-type: none;
+padding: 0;
+margin: 0 auto;
+}
+
+.cw-board-9by9 {
+position: absolute;
+z-index: 1;
+background: transparent;
+/* border: 1px solid #000000;*/
+border: 0;
+display: grid;
+width: 370px;
+height: 370px;
+grid-template: repeat(9, 11.1111%)/repeat(9, 11.1111%); 
+list-style-type: none;
+padding: 0;
+margin: 0 auto;
+}
+
+.cw-board-15by15 {
+position: absolute;
+z-index: 1;
+background: transparent;
+border: 1px solid #000000;
+display: grid;
+width: 600px;
+height: 600px;
+grid-template: repeat(15, 6.6667%)/repeat(15, 6.6667%); 
+list-style-type: none;
+padding: 0;
+margin: 0 auto;
+}
+
+.cw-board-17by17 {
+position: absolute;
+z-index: 1;
+background: transparent;
+/* border: 1px solid #000000;*/
+border: 0;
+display: grid;
+width: 680px;
+height: 680px;
+grid-template: repeat(17, 5.8824%)/repeat(17, 5.8824%); 
+list-style-type: none;
+padding: 0;
+margin: 0 auto;
+}
+
+.cw-board-20by20 {
+position: absolute;
+z-index: 1;
+background: transparent;
+border: 1px solid #000000;
+display: grid;
+width: 800px;
+height: 800px;
+grid-template: repeat(20, 5%)/repeat(20, 5%); 
+list-style-type: none;
+padding: 0;
+margin: 0 auto;
+}
+
+.cw-board-22by22 {
+position: absolute;
+z-index: 1;
+background: transparent;
+/* border: 1px solid #000000;*/
+border: 0;
+display: grid;
+width: 880px;
+height: 880px;
+grid-template: repeat(22, 4.5454%)/repeat(22, 4.5454%); 
+list-style-type: none;
+padding: 0;
+margin: 0 auto;
+}
+
+/* Crossword cell background : z-index 90 of cell */
+
+.cw-item-bg {
+background: transparent;
+position: relative;
+z-index: 90;
+}
+
+/* Crossword cell : z-index 100 of cell */
+
+.cw-item {
+border: 1px solid #000000;
+background: transparent;
+position: relative;
+z-index: 100;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+text-transform: uppercase;
+}
+
+/* Crossword param cell */
+
+.cw-param-item {
+border: 1px solid #000000;
+background: transparent;
+position: relative;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+text-transform: uppercase;
+}
+
+/* Crossword number cell */
+
+.cw-number-item {
+border: 0;
+background: transparent;
+position: relative;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+text-transform: uppercase;
+margin: auto;
+}
+
+/* Blank crossword cell */
+
+.cw-blank {
+background: #000000;
+border: 1px solid #000000;
+outline: 1px solid #000000;
+}
+
+/* Crossword cell backgrounds : z-index 50 of cell */
+
+.cw-itembgs {
+position: absolute;
+z-index: 50;
+}
+
+/* Crossword cell background */
+
+.cw-itembg {
+position: relative;
+}
+
+/* Crossword cell labels (clue number) : z-index 60 of cell */
+
+.cw-labels {
+position: absolute;
+z-index: 60;
+}
+
+/* Crossword cell label (clue number) */
+
+.cw-label {
+position: relative;
+}
+
+/* Crossword cell label text (clue number) */
+
+.cw-label-text {
+position: absolute;
+top: 2px;
+left: 2px;
+font-size: 11px;
+line-height: 1;
+}
+
+/* Crossword clues */
+
+.cw-clues-7by7{
+position: absolute;
+top: 0;
+left: 400px;
+width: 920px;
+height: 1200px;
+}
+
+.cw-clues-9by9{
+position: absolute;
+top: 0;
+left: 450px;
+width: 920px;
+height: 1200px;
+}
+
+.cw-clues-15by15{
+position: absolute;
+top: 0;
+left: 600px;
+width: 920px;
+height: 1200px;
+}
+
+.cw-clues-17by17{
+position: absolute;
+top: 0;
+left: 680px;
+width: 920px;
+height: 1200px;
+}
+
+.cw-clues-20by20{
+position: absolute;
+top: 0;
+left: 820px;
+width: 920px;
+height: 1200px;
+}
+
+.cw-clues-22by22{
+position: absolute;
+top: 0;
+left: 900px;
+width: 920px;
+height: 1200px;
+}
+
+/* Crossword clues list */
+
+.cw-clues-list {
+column-count: 4;
+column-gap: 2px;
+}
+
+/* Crossword clues list title */
+
+.cw-clues-list-title {
+font-weight: bold;
+padding: 4px;
+}
+
+/* Crossword clue row */
+
+.cw-clues-row {
+padding: 4px;
+}
+
+/* Crossword clue */
+
+.cw-clues-list-item  {
+display: inline-block;
+width:160px;
+word-wrap:break-word;
+}
+
+/* Crossword clue anchor */
+
+.cw-clues-list-item a {
+color:black;
+text-decoration:none;
+}
+
+/* Crossword clue prefix number */
+
+.cw-clues-label {
+display: inline-block;
+width:30px;
+vertical-align: top;
+text-align: right;
+padding-right: 6px;
+}
+
+/* Crossword clue param text area */
+.cw-clues-param-text-7by7{
+width: 600px;
+height: 160px;
+}
+
+/* Crossword clue param text area */
+.cw-clues-param-text-15by15{
+width: 600px;
+height: 300px;
+}
+
+/* Crossword clue param text area */
+.cw-clues-param-text-20by20{
+width: 600px;
+height: 400px;
+}
+
+
+
+/* Crossword name etc in select options for init */
+
+.cw-init-select {
+width: 160px;
+margin-right: 20px;
+}
+
+/* Crossword name etc in inputs for init */
+
+.cw-init-input {
+width: 160px;
+margin-right: 20px;
+}
+
+/* Crossword export/import text area */
+.cw-export-import-text {
+width: 1200px;
+height: 400px;
+}
+
+/* Info message */
+
+.cw-message-info {
+color: white;
+background-color: green;
+margin-top: 20px;  
+margin-bottom: 20px;  
+margin-left: 0px;
+margin-right: 0px;
+width: fit-content;
+padding-right: 12px;
+padding-left: 12px;
+padding-top: 6px;
+padding-bottom: 6px;
+}
+
+/* Error message */
+
+.cw-message-error {
+color: white;
+background-color: red;
+margin-top: 20px;  
+margin-bottom: 20px;  
+margin-left: 0px;
+margin-right: 0px;
+width: fit-content;
+padding-right: 12px;
+padding-left: 12px;
+padding-top: 6px;
+padding-bottom: 6px;
+}
+
+/* Warning message */
+
+.cw-message-warn {
+color: white;
+background-color: orange;
+margin-top: 20px;  
+margin-bottom: 20px;  
+margin-left: 0px;
+margin-right: 0px;
+width: fit-content;
+padding-right: 12px;
+padding-left: 12px;
+padding-top: 6px;
+padding-bottom: 6px;
 }
