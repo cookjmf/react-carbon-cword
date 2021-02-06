@@ -1,5 +1,6 @@
 import React from 'react';
-import * as Util from './util';
+import 'carbon-components/css/carbon-components.min.css';
+import { TextInput } from 'carbon-components-react';
 
 class NewName extends React.Component {
 
@@ -12,16 +13,34 @@ class NewName extends React.Component {
   render() {
     console.log('NewName : render : enter');
 
+    //           className="cw-init-input"  
     return (
-      <input
-      name="cwnewname" 
-      id="cwnewname" 
-      className="cw-init-input" 
-      placeholder={Util.NAME_PLACEHOLDER}
-      onChange={(ev) => this.props.onChange(ev.target.value)}
+      <div 
+      className="name-container"
+      style={ { "height": 80,"width": 250,  "display": "inline-block", "padding-right": "30px", "background-color": "yellow"} }
       >
-      </input>
+        {/* <label> fff</label> */}
+        <TextInput
+          name="cwnewname" 
+          id="cwnewname"    
+          labelText="fff"
+          size="sm"
+          placeholder="Enter name"
+          onChange={(ev) => this.props.onChange(ev)}
+        />
+      </div>
     );
+
+    // return (
+    //   <input
+    //   name="cwnewname" 
+    //   id="cwnewname" 
+    //   className="cw-init-input" 
+    //   placeholder={Util.NAME_PLACEHOLDER}
+    //   onChange={(ev) => this.props.onChange(ev.target.value)}
+    //   >
+    //   </input>
+    // );
     
   }
 

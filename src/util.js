@@ -13,12 +13,12 @@ export const ACTION_DELETE = 'delete';
 
 // Name
 export const NAME_TITLE = '--Choose crossword--';
-export const NAME_PLACEHOLDER = '--Enter name--';
+// export const NAME_PLACEHOLDER = '--Enter name--';
 export const NAME_MIN_LEN = 3;
 export const NAME_MAX_LEN = 80;
 
 // Size
-export const SIZE_TITLE = '--Choose size--';
+// export const SIZE_TITLE = '--Choose size--';
 export const SIZES_ALLOWED = [ '7', '15', '20' ];
 
 // Examples

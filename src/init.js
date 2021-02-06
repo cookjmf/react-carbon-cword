@@ -17,7 +17,9 @@ class Init extends React.Component {
     console.log('Init : renderCreate : enter');
 
     return (
-      <div id="cw-init-cont" className="cw-cont"> 
+      <div id="cw-init-cont" className="cw-cont" 
+      // style={ { "height": 120, "background-color": "MediumSeaGreen"} }
+      > 
         <Action                
           selected= { this.props.selectedAction }  
           existingNames={ this.props.existingNames}  
@@ -26,7 +28,7 @@ class Init extends React.Component {
         <NewName       
           onChange={ this.props.onChangeNewName }
         />
-        <Size    
+        <Size   
           selected={ this.props.selectedSize }   
           onChange={ this.props.onChangeSize }
         />

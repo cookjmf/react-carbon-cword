@@ -137,15 +137,7 @@ class Game extends React.Component {
     console.log('Game : START : onChangeName ----> text : '+newName+' --------->');
     console.log('Game : START : onChangeName ----> value : '+newNameValue+' --------->');
     console.log('Game : START : -------------------------------------------->');
-  
-  // onChangeName(newName) {
-
-  //   console.log('Game : START : -------------------------------------------->');
-  //   console.log('Game : START : onChangeName ----> '+newName+' --------->');
-  //   console.log('Game : START : -------------------------------------------->');
-
-    // console.log('Game : onChangeName : enter : newName : ...'+newName+'...');
-    //   
+     
     let action = this.state.action;
     if (action === Util.ACTION_DELETE) {
       let cword = new Cword();
@@ -178,11 +170,22 @@ class Game extends React.Component {
 
   }
 
-  onChangeNewName(newName) {
+  onChangeNewName(ev) {
+
+    let target = ev.target;
+    let newNameId = ev.id;
+    let newName = target.value;
 
     console.log('Game : START : -------------------------------------------->');
-    console.log('Game : START : onChangeNewName ----> '+newName+' --------->');
+    console.log('Game : START : onChangeNewName ----> id : '+newNameId+' --------->');
+    console.log('Game : START : onChangeNewName ----> value : '+newName+' --------->');
     console.log('Game : START : -------------------------------------------->');
+
+  // onChangeNewName(newName) {
+
+  //   console.log('Game : START : -------------------------------------------->');
+  //   console.log('Game : START : onChangeNewName ----> '+newName+' --------->');
+  //   console.log('Game : START : -------------------------------------------->');
 
     let action = this.state.action;
     if (action === Util.ACTION_CREATE) {
@@ -208,11 +211,18 @@ class Game extends React.Component {
     }
   }
 
-  onChangeSize(newSize) {
+  onChangeSize(ev) {
+
+    let selectedItem = ev.selectedItem;
+    let newSizeId = selectedItem.id;
+    let newSize = selectedItem.text;
+    let newSizeValue = selectedItem.value;
 
     console.log('Game : START : -------------------------------------------->');
-    console.log('Game : START : onChangeSize ----> '+newSize+' --------->');
-    console.log('Game : START : -------------------------------------------->');  
+    console.log('Game : START : onChangeSize ----> id : '+newSizeId+' --------->');
+    console.log('Game : START : onChangeSize ----> text : '+newSize+' --------->');
+    console.log('Game : START : onChangeSize ----> value : '+newSizeValue+' --------->');
+    console.log('Game : START : -------------------------------------------->');
 
     let cword = this.state.cword;
     cword.init(newSize);
@@ -269,12 +279,12 @@ class Game extends React.Component {
     let action = this.state.action;
     let existingNames = this.state.existingNames;
 
+    //  selectedSize: Util.SIZE_TITLE, 
     if (action === Util.ACTION_CREATE) {
       if (!Util.isValidName(name) || Util.isDuplicateName(existingNames, name)) {
         // force user to choose "Size" again
         this.setState( { 
-          selectedAction: Util.ACTION_CREATE, 
-          selectedSize: Util.SIZE_TITLE, 
+          selectedAction: Util.ACTION_CREATE,        
           msg: null, 
           updateTimestamp: Util.newDate() } 
           );  
@@ -1109,6 +1119,7 @@ class Game extends React.Component {
     // chose create, show name, size
     console.log('Game : renderCreate : enter');
     // console.log('Game : renderCreate : state : '+JSON.stringify(this.state));
+    // selectedSize={ Util.SIZE_TITLE }
     return (
       <div className="game">   
         <Init 
@@ -1116,7 +1127,7 @@ class Game extends React.Component {
           selectedAction={Util.ACTION_CREATE}         
           selectedName={Util.NAME_TITLE}       
           existingNames={ this.state.existingNames }
-          selectedSize={ Util.SIZE_TITLE }
+          
           onChangeAction={ this.onChangeAction }
           onChangeName={ this.onChangeName }
           onChangeNewName={ this.onChangeNewName }
@@ -1158,7 +1169,7 @@ class Game extends React.Component {
     // console.log('Game : renderCreateWithName : state : '+JSON.stringify(this.state));
 
     let cword = this.state.cword;
-
+   //  selectedSize={ Util.SIZE_TITLE }
     return (
       <div className="game">   
         <Init 
@@ -1167,7 +1178,7 @@ class Game extends React.Component {
           name={ cword.name}
           selectedName={this.state.name}
           size={ cword.size}
-          selectedSize={ Util.SIZE_TITLE }
+         
           onChangeAction={ this.onChangeAction }
           onChangeName={ this.onChangeName }
           onChangeNewName={ this.onChangeNewName }

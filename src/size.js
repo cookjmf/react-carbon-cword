@@ -1,6 +1,9 @@
 import React from 'react';
 import * as Util from './util';
 
+import 'carbon-components/css/carbon-components.min.css';
+import { Dropdown } from 'carbon-components-react';
+
 class Size extends React.Component {
 
   constructor(props) {
@@ -45,7 +48,10 @@ class Size extends React.Component {
     }
 
     return (
-      <div style={ { "width": 200,  "display": "inline-block", "padding-right": "30px" } }>
+      <div 
+      className='size-container'
+      style={ {  "height": 80, "width": 200,  "display": "inline-block", "padding-right": "30px", "background-color": "pink" } }
+      >
         <Dropdown
           name="cwsizes" 
           id="cwsizes"     

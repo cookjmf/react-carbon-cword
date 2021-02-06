@@ -34,6 +34,10 @@ class Action extends React.Component {
         Util.ACTION_IMPORT, Util.ACTION_CLEAR];
     }
 
+    // note: how to set the selected item:
+    // const items = ['Option 1', 'Option 2', 'Option 3']
+    // <Dropdown initialSelectedItem={items[2]} />;
+
     let selectedAction = this.props.selected;
     if (selectedAction == null) {
       selectedAction = '';
@@ -51,7 +55,14 @@ class Action extends React.Component {
     }
 
     return (
-      <div style={ { "width": 200,  "display": "inline-block", "padding-right": "30px" } }>
+      <div className="action-container"
+      //  style={ { 
+      //   "height": 80, 
+      //   "width": 200,  
+      // "display": "inline-block",
+      //  "padding-right": "30px",
+      //   "background-color": "orange" } }
+        >
         <Dropdown
           name="cwactions" 
           id="cwactions"        
