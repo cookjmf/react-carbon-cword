@@ -18,11 +18,10 @@ class Size extends React.Component {
     console.log('Size : render : props : '+JSON.stringify(this.props));
 
     let selectedSize = this.props.selected;
-    if (selectedSize == null) {
-      selectedSize = '';
-    }
-
-    // const options = [];
+    
+    if (selectedSize == null || selectedSize.length === 0) {
+      selectedSize = 'Select a size ...';
+    } 
 
     let sizes = [];
     // sizes.push(Util.SIZE_TITLE);
@@ -30,13 +29,8 @@ class Size extends React.Component {
       sizes.push(Util.SIZES_ALLOWED[i]);
     }
 
-    // for (let i=0; i<sizes.length; i++) {
-    //   let id = ''+i;
-    //   let size = sizes[i];
-    //   options.push(<option key={id} value={size}>{size}</option>);
-    // }
-
     const items = [];
+    let selectedItem = null;
     for (let i=0; i<sizes.length; i++) {
       let size = sizes[i];
       let item = {
@@ -44,13 +38,24 @@ class Size extends React.Component {
         text: size,
         value: size,
       }
+
+      if (size === selectedSize) {
+        selectedItem = item;
+      }
+
       items.push(item);
     }
 
     return (
       <div 
-      className='size-container'
-      style={ {  "height": 80, "width": 200,  "display": "inline-block", "padding-right": "30px", "background-color": "pink" } }
+      // className='size-container'
+      style={ {  
+        // "height": 80, 
+        "width": 200,  
+         // "display": "inline-block", 
+         "paddingRight": "30px", 
+         // "background-color": "pink" 
+       } }
       >
         <Dropdown
           name="cwsizes" 
@@ -58,6 +63,7 @@ class Size extends React.Component {
           className="cw-init-select"    
           titleText="Size"    
           label={selectedSize}  
+          selectedItem={selectedItem}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           size="sm"
@@ -65,17 +71,6 @@ class Size extends React.Component {
         />
       </div>
     ); 
-
-    // return (
-    //   <select value={selectedSize}
-    //   name="cwsizes" 
-    //   id="cwsizes" 
-    //   className="cw-init-select" 
-    //   onChange={(ev) => this.props.onChange(ev.target.value)}
-    //   >
-    //   {options}
-    //   </select>
-    // );
     
   }
 

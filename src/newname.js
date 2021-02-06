@@ -16,14 +16,20 @@ class NewName extends React.Component {
     //           className="cw-init-input"  
     return (
       <div 
-      className="name-container"
-      style={ { "height": 80,"width": 250,  "display": "inline-block", "padding-right": "30px", "background-color": "yellow"} }
+      // className="name-container"
+      style={ { 
+        // "height": 80,
+        "width": 250,  
+      // "display": "inline-block", 
+        "paddingRight": "30px", 
+      // "background-color": "yellow"
+      } }
       >
         {/* <label> fff</label> */}
         <TextInput
           name="cwnewname" 
           id="cwnewname"    
-          labelText="fff"
+          labelText="Name"
           size="sm"
           placeholder="Enter name"
           onChange={(ev) => this.props.onChange(ev)}

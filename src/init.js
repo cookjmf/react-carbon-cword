@@ -17,8 +17,13 @@ class Init extends React.Component {
     console.log('Init : renderCreate : enter');
 
     return (
-      <div id="cw-init-cont" className="cw-cont" 
-      // style={ { "height": 120, "background-color": "MediumSeaGreen"} }
+      <div id="cw-init-cont" 
+      className="cw-cont" 
+      // style={ { 
+        // "display": "flex", 
+        // "height": 120, 
+        // "background-color": "MediumSeaGreen"
+      // } }
       > 
         <Action                
           selected= { this.props.selectedAction }  

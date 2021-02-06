@@ -284,7 +284,8 @@ class Game extends React.Component {
       if (!Util.isValidName(name) || Util.isDuplicateName(existingNames, name)) {
         // force user to choose "Size" again
         this.setState( { 
-          selectedAction: Util.ACTION_CREATE,        
+          selectedAction: Util.ACTION_CREATE, 
+          selectedSize: '',       
           msg: null, 
           updateTimestamp: Util.newDate() } 
           );  
@@ -1178,7 +1179,7 @@ class Game extends React.Component {
           name={ cword.name}
           selectedName={this.state.name}
           size={ cword.size}
-         
+          selectedSize=''
           onChangeAction={ this.onChangeAction }
           onChangeName={ this.onChangeName }
           onChangeNewName={ this.onChangeNewName }
@@ -1216,7 +1217,7 @@ class Game extends React.Component {
       <div className="game"> 
         <Init 
           action=''
-          
+          selectedAction=''
           selectedSize={ cword.size }
           existingNames={ this.state.existingNames }
           onChangeAction={ this.onChangeAction }

@@ -39,35 +39,46 @@ class Action extends React.Component {
     // <Dropdown initialSelectedItem={items[2]} />;
 
     let selectedAction = this.props.selected;
-    if (selectedAction == null) {
-      selectedAction = '';
-    }
+    
+    if (selectedAction == null || selectedAction.length === 0) {
+      selectedAction = 'Select an action ...';
+    } 
 
+    let selectedItem = null;
     const items = [];
     for (let i=0; i<actionNames.length; i++) {
       let actionName = actionNames[i];
+      
       let item = {
         id: 'action-'+i,
         text: actionName,
         value: actionName,
       }
+
+      if (actionName === selectedAction) {
+        selectedItem = item;
+      }
+
       items.push(item);
     }
 
     return (
-      <div className="action-container"
-      //  style={ { 
-      //   "height": 80, 
-      //   "width": 200,  
-      // "display": "inline-block",
-      //  "padding-right": "30px",
-      //   "background-color": "orange" } }
+      <div 
+      // className="action-container"
+       style={ { 
+        //  "height": 80, 
+         "width": 250,  
+      //   "display": "inline-block",
+         "paddingRight": "30px",
+        //  "background-color": "orange" 
+        } }
         >
         <Dropdown
           name="cwactions" 
           id="cwactions"        
           titleText="Action"
           label={selectedAction}
+          selectedItem={selectedItem}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           size="sm"
