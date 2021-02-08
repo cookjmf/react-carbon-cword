@@ -13,6 +13,8 @@ class Msg {
       this.cls = 'cw-message-warn';
     } else if (sev === 'I') {
       this.cls = 'cw-message-info';
+    } else if (sev === 'S') {
+      this.cls = 'cw-message-success';
     }
   }
 

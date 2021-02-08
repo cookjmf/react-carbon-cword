@@ -63,19 +63,16 @@ class Action extends React.Component {
     }
 
     return (
-      <div 
-      // className="action-container"
-       style={ { 
-        //  "height": 80, 
-         "width": 250,  
-      //   "display": "inline-block",
-         "paddingRight": "30px",
-        //  "background-color": "orange" 
-        } }
+      <div className="cw-dropdown-container"
+      // debug
+      //  style={ { 
+      //   //  "height": 80, 
+      //   //  "background-color": "orange" 
+      //   } }
         >
         <Dropdown
-          name="cwactions" 
-          id="cwactions"        
+          name="cw-actions" 
+          id="cw-actions"        
           titleText="Action"
           label={selectedAction}
           selectedItem={selectedItem}

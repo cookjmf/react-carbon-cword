@@ -55,14 +55,14 @@ class Name extends React.Component {
     }
 
     return (
-      <div style={ { 
-        "width": 200,  
-        // "display": "inline-block", 
-        "paddingRight": "30px" 
-        } }>
+      <div className="cw-dropdown-container"
+      // debug     
+      // style={ { 
+      //   } }
+        >
         <Dropdown
-          name="cwnames" 
-          id="cwnames"        
+          name="cw-names" 
+          id="cw-names"        
           titleText="Name"    
           label={selectedName}
           selectedItem={selectedItem}   

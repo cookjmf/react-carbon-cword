@@ -47,19 +47,16 @@ class Size extends React.Component {
     }
 
     return (
-      <div 
-      // className='size-container'
-      style={ {  
-        // "height": 80, 
-        "width": 200,  
-         // "display": "inline-block", 
-         "paddingRight": "30px", 
-         // "background-color": "pink" 
-       } }
+      <div className="cw-dropdown-container"
+      // debug
+      // style={ {  
+      //   // "height": 80, 
+      //    // "background-color": "pink" 
+      //  } }
       >
         <Dropdown
-          name="cwsizes" 
-          id="cwsizes"     
+          name="cw-sizes" 
+          id="cw-sizes"     
           className="cw-init-select"    
           titleText="Size"    
           label={selectedSize}  

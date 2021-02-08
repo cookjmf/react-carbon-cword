@@ -40,9 +40,9 @@ class Play extends React.Component {
       };
       selectedClueText = selectedClue.getSelectedText();
     }
-
+    // className="cw-cont"
     return (
-      <div id="cw-cont" className="cw-cont">
+      <div id="cw-cont-play" >
 
         <div id="cw-selclue" className="cw-clues-current"
         style={style1} >
