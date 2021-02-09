@@ -1,4 +1,3 @@
-
 const Cword = require("../models/cword.model.js");
 
 // Create and Save a new Cword
@@ -43,9 +42,9 @@ exports.findAll = (req, res) => {
     }
     else {
       var myJSON = JSON.stringify(data);
-      console.log("Sending response : ..."+myJSON+"...");
+      // console.log("Sending response : ..."+myJSON+"...");
       res.send(data);
-      console.log("Sent response");
+      // console.log("Sent response");
     };
   });
 };
@@ -160,7 +159,9 @@ exports.delete = (req, res) => {
           message: "Could not delete Cword with id " + req.params.cwordId
         });
       }
-    } else res.send({ message: `Cword was deleted successfully!` });
+    } else {
+      res.send({ message: `Cword was deleted successfully!` });
+    }
   });
 };
 
@@ -177,19 +178,23 @@ exports.deleteByName = (req, res) => {
           message: "Could not delete Cword with name " + req.params.name
         });
       }
-    } else res.send({ message: `Cword was deleted successfully!` });
+    } else {
+      res.send({ message: `Cword was deleted successfully!` });
+    }
   });
 };
 
 // Delete all Cwords from the database.
 exports.deleteAll = (req, res) => {
   Cword.removeAll((err, data) => {
-    if (err)
+    if (err) {
       res.status(500).send({
         message:
           err.message || "Some error occurred while removing all cwords."
       });
-    else res.send({ message: `All Cwords were deleted successfully!` });
+    } else {
+      res.send({ message: `All Cwords were deleted successfully!` });
+    }
   });
 };
 

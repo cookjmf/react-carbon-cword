@@ -1,4 +1,3 @@
-
 module.exports = {
   HOST: "localhost",
   USER: "sa",

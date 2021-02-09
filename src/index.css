@@ -8,6 +8,7 @@ font-size:13px;
 font-family: IBMPlexSans,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
+/* css definitions here override the carbon css definitions */
 /* .bx--inline-notification__icon {
   background: yellow;
 } */
@@ -21,11 +22,11 @@ margin: 30px 0 0 30px;
 display: flex;
 }
 
-/* .cw-message-cont {
+.cw-message-cont {
 position: relative;
 background: #FFFFFF; 
 margin: 30px 0 0 30px;
-} */
+} 
 
 /* Crossword dropdowns (actions, names, sizes) */
 .cw-dropdown-container{

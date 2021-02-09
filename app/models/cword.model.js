@@ -14,7 +14,7 @@ Cword.create = (newCword, result) => {
       return;
     }
 
-    console.log("created cword: ", { id: res.insertId, ...newCword });
+    // console.log("created cword: ", { id: res.insertId, ...newCword });
     result(null, { id: res.insertId, ...newCword });
   });
 };
@@ -28,7 +28,7 @@ Cword.findById = (cwordId, result) => {
     }
 
     if (res.length) {
-      console.log("found cword: ", res[0]);
+      // console.log("found cword: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -47,7 +47,7 @@ Cword.findByName = (name, result) => {
     }
 
     if (res.length) {
-      console.log("found cword: ", res[0]);
+      // console.log("found cword: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -65,7 +65,7 @@ Cword.getAll = result => {
       return;
     }
 
-    console.log("cwords: ", res);
+    // console.log("cwords: ", res);
     result(null, res);
   });
 };
@@ -87,7 +87,7 @@ Cword.updateById = (id, cword, result) => {
         return;
       }
 
-      console.log("updated cword: ", { id: id, ...cword });
+      // console.log("updated cword: ", { id: id, ...cword });
       result(null, { id: id, ...cword });
     }
   );
@@ -112,7 +112,7 @@ Cword.updateByName = (name, cword, result) => {
         return;
       }
 
-      console.log("updated cword: ", { name: name, ...cword });
+      // console.log("updated cword: ", { name: name, ...cword });
       result(null, { name: name, ...cword });
     }
   );
@@ -132,7 +132,7 @@ Cword.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted cword with id: ", id);
+    // console.log("deleted cword with id: ", id);
     result(null, res);
   });
 };
@@ -151,7 +151,7 @@ Cword.removeByName = (name, result) => {
       return;
     }
 
-    console.log("deleted cword with name: ", name);
+    // console.log("deleted cword with name: ", name);
     result(null, res);
   });
 };
@@ -164,7 +164,7 @@ Cword.removeAll = result => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} cwords`);
+    // console.log(`deleted ${res.affectedRows} cwords`);
     result(null, res);
   });
 };

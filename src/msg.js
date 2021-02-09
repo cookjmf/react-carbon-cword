@@ -30,6 +30,20 @@ class Msg {
     }
     return fullText;
   }
+
+  kind() {
+    let kind = "";
+    if (this.cls === "cw-message-error") {
+      kind = "error";
+    } else if (this.cls === "cw-message-warn") {
+      kind = "warning";
+    } else if (this.cls === "cw-message-success") {
+      kind = "success";
+    } else if (this.cls === "cw-message-info") {
+      kind = "info";
+    }
+    return kind;
+  }
 }
 
 export default Msg;

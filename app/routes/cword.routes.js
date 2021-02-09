@@ -1,4 +1,3 @@
-
 module.exports = app => {
   const cwords = require("../controllers/cword.controller.js");
 

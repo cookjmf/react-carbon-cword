@@ -1,4 +1,3 @@
-
 const mysql = require("mysql");
 const dbConfig = require("../config/cword.db.config.js");
 
