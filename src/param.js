@@ -51,7 +51,7 @@ class Param extends React.Component {
       } 
       // className="cw-cont"
       return (
-        <div id="cw-params-cont" >
+        <div id="cw-params-cont" className="cw-params-cont">
           <textarea id="cw-export-text" className="cw-export-import-text"           
             placeholder={ph}
             value={text}
@@ -72,7 +72,7 @@ class Param extends React.Component {
       let cwordText = JSON.stringify(cwObj);
       // className="cw-cont"
       return (
-        <div id="cw-params-cont" >
+        <div id="cw-params-cont" className="cw-params-cont">
           <textarea id="cw-export-text" className="cw-export-import-text"
             value={cwordText} readOnly
             >
@@ -92,7 +92,7 @@ class Param extends React.Component {
     let cluesClassName = 'cw-clues-'+suffix;
     // className="cw-cont"
     return (
-      <div id="cw-params-cont" >
+      <div id="cw-params-cont" className="cw-params-cont">
         <div id="cw-params-board" className={boardClassName}>
           <ParamBoard
             cword={ cword}
