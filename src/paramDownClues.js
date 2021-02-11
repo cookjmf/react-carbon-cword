@@ -1,6 +1,9 @@
 import React from 'react';
 import * as Util from './util';
 
+import 'carbon-components/css/carbon-components.min.css';
+import { TextArea } from 'carbon-components-react';
+
 class ParamDownClues extends React.Component {
 
   constructor(props) {
@@ -29,8 +32,10 @@ class ParamDownClues extends React.Component {
     let cword = this.props.cword;
 
     let size = cword.size;
-    let suf = size+'by'+size;
-    let taClass="cw-clues-param-text-"+suf;
+
+    let rows = 1 * size;
+    let cols = 100;
+
 
     let ph = "Enter Down Clues";
     let text = "";
@@ -41,21 +46,26 @@ class ParamDownClues extends React.Component {
       ph = "";
     } 
 
+  //   <div id="cw-clues-list-down-title" className="cw-clues-list-title">
+  //   Down
+  // </div>
+
     return (
       <>
-      <div id="cw-clues-list-down" className="cw-clues-list-down">
-        <div id="cw-clues-list-down-title" className="cw-clues-list-title">
-          Down
-        </div>
-        <div >
-          <textarea id="cw-clues-param-down-text" className={taClass}
+      <div id="cw-clues-list-down" className="cw-clues-param-list-down">
+
+        <div>
+          <TextArea id="cw-clues-param-down-text" className="cw-clues-param-text"
           placeholder={ph}
           ref={ this.textarea }
           onChange={(ev) => this.props.onKeyUp(ev)}
           onKeyUp={(ev) => this.props.onKeyUp(ev)}
           value={text}
+          labelText="Down"
+          rows={rows}
+          cols={cols}
           >
-          </textarea>
+          </TextArea>
         </div>
       </div>
       </>

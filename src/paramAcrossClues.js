@@ -1,6 +1,9 @@
 import React from 'react';
 import * as Util from './util';
 
+import 'carbon-components/css/carbon-components.min.css';
+import { TextArea } from 'carbon-components-react';
+
 class ParamAcrossClues extends React.Component {
 
   constructor(props) {
@@ -35,8 +38,9 @@ class ParamAcrossClues extends React.Component {
     let cword = this.props.cword;
 
     let size = cword.size;
-    let suf = size+'by'+size;
-    let taClass="cw-clues-param-text-"+suf;
+
+    let rows = 1 * size;
+    let cols = 100;
 
     console.log('horizClues = '+cword.horizClues);
     console.log('paramTextareaSelected = '+cword.paramTextareaSelected);
@@ -50,21 +54,26 @@ class ParamAcrossClues extends React.Component {
       ph = "";
     } 
 
+  //   <div id="cw-clues-list-across-title" className="cw-clues-list-title">
+  //   Across
+  // </div>
+
     return (
       <>
-      <div id="cw-clues-list-across" className="cw-clues-list-across">
-        <div id="cw-clues-list-across-title" className="cw-clues-list-title">
-          Across
-        </div>
+      <div id="cw-clues-list-across" className="cw-clues-param-list-across">
+
         <div >
-          <textarea id="cw-clues-param-across-text" className={taClass}
+          <TextArea id="cw-clues-param-across-text" className="cw-clues-param-text"
           placeholder={ph}
           ref={ this.textarea }
           onKeyUp={(ev) => this.props.onKeyUp(ev)}
           onChange={(ev) => this.props.onKeyUp(ev)}
           value={text}
+          labelText="Across"
+          rows={rows}
+          cols={cols}
           >
-          </textarea>
+          </TextArea>
         </div>
       </div>
       </>

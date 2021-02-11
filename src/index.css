@@ -332,23 +332,41 @@ text-align: right;
 padding-right: 6px;
 }
 
-/* Crossword clue param text area */
+/* Crossword clue param text area 
 .cw-clues-param-text-7by7{
 width: 600px;
 height: 160px;
 }
+*/
+
+.cw-clues-param-list-across {
+margin-top: 15px;
+}
+
+.cw-clues-param-list-down {
+margin-top: 15px;
+}
 
 /* Crossword clue param text area */
+.cw-clues-param-text {
+min-width:500px; 
+max-width:100%;
+min-height:50px;
+height:100%;
+width:100%;
+}
+
+/* Crossword clue param text area 
 .cw-clues-param-text-15by15{
 width: 600px;
 height: 300px;
-}
+}*/
 
-/* Crossword clue param text area */
+/* Crossword clue param text area 
 .cw-clues-param-text-20by20{
 width: 600px;
 height: 400px;
-}
+}*/
 
 
 
