@@ -1677,6 +1677,11 @@ class Cword {
   }
 
   makeCurrentCell(cell) {
+
+    if (cell == null) {
+      console.log("Logic error : cannot set current cell to null");
+    }
+
     this.selectedCell = cell;
 
     // calculate desired background colors
@@ -1883,17 +1888,39 @@ class Cword {
     let newCellKey = Util.cellKeyFromCellId(newId);
     let newCell = this.cellMap.get(newCellKey);
 
-    let newClue = null; 
+    // let newClue = null; 
      
-    if (acrossSel) { 
-      newClue = newCell.acrossClue;
-    } else {
-      newClue = newCell.downClue;
-    }
-    this.selectedClue = newClue;   
+    // if (acrossSel) { 
+    //   newClue = newCell.acrossClue;
+    // } else {
+    //   newClue = newCell.downClue;
+    // }
+    // this.selectedClue = newClue;   
+
+    this.makeCurrentClue(newCell, acrossSel);
 
     this.makeCurrentCell(newCell);
     
+  }
+
+  makeCurrentClue(cell, isAcross) {
+    // some cells do not have both across and down clues
+    // must always find a not null clue for the cell
+    let newClue = null; 
+    if (isAcross) { 
+      if (cell.acrossClue != null) {
+        newClue = cell.acrossClue;
+      } else {
+        newClue = cell.downClue;
+      }
+    } else {
+      if (cell.downClue != null) {
+        newClue = cell.downClue;
+      } else {
+        newClue = cell.acrossClue;
+      }
+    }
+    this.selectedClue = newClue;  
   }
 
   tabUp(cell, delta) {
@@ -1938,22 +1965,24 @@ class Cword {
     let acrossClue = cell.acrossClue;
     let acrossSel = this.isSelectedClue(acrossClue);
 
-    let downClue = cell.downClue
+    // let downClue = cell.downClue
     // let downSel = this.isSelectedClue(downClue);
 
-    if (acrossClue != null) {
-      if (downClue != null) {
-        if (acrossSel) {
-          this.selectedClue = newCell.downClue;
-        } else {
-          this.selectedClue = newCell.acrossClue;
-        }
-      } else {
-        this.selectedClue = newCell.acrossClue;
-      }
-    } else {
-      this.selectedClue = newCell.downClue;
-    }
+    this.makeCurrentClue(newCell, acrossSel);
+
+    // if (acrossClue != null) {
+    //   if (downClue != null) {
+    //     if (acrossSel) {
+    //       this.selectedClue = newCell.downClue;
+    //     } else {
+    //       this.selectedClue = newCell.acrossClue;
+    //     }
+    //   } else {
+    //     this.selectedClue = newCell.acrossClue;
+    //   }
+    // } else {
+    //   this.selectedClue = newCell.downClue;
+    // }
 
     console.log('arrowUp : selectedClue : '+this.selectedClue.uniqLocation());
 
