@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, createRef } from 'react';
 
 import ParamBoard from './paramBoard';
 import ParamAcrossClues from './paramAcrossClues';
 import ParamDownClues from './paramDownClues';
 import * as Util from './util';
 
-// class Param extends React.Component {
-
-//   constructor(props) {
-//     super(props); 
-//     state = {};
-//     textarea = React.createRef();
-//   }
-
 const Param = (props) => {
 
   console.log('Param : enter');
 
-  let textarea = React.createRef();
+  let textarea = createRef();
 
   useEffect(() => {
     console.log('Param : useEffect : enter');
@@ -37,27 +29,6 @@ const Param = (props) => {
     } 
   });
 
-  // componentDidUpdate() {
-  //   console.log('Param : componentDidUpdate : enter');
-  //   let elem = textarea.current;   
-  //   if (elem != null) {
-  //     let cword = props.cword;
-
-  //     console.log('paramTextareaSelected = '+cword.paramTextareaSelected);
-  //     console.log('paramImportStart = '+cword.paramImportStart);
-  //     console.log('paramImportEnd = '+cword.paramImportEnd);
-
-  //     if (cword.paramTextareaSelected === Util.TA_IMPORT) { 
-  //       elem.selectionStart = cword.paramImportStart;
-  //       elem.selectionEnd = cword.paramImportEnd;
-  //       elem.focus();
-  //     }
-  //   } 
-  // }
-  
-  
-  
-
   let action = props.action;
   let cword = props.cword;
 
@@ -74,7 +45,7 @@ const Param = (props) => {
       text = ''+cword.importJson; 
       ph = "";
     } 
-    // className="cw-cont"
+
     return (
       <div id="cw-params-cont" className="cw-params-cont">
         <textarea id="cw-export-text" className="cw-export-import-text"           
@@ -93,7 +64,7 @@ const Param = (props) => {
   if (action === Util.ACTION_EXPORT) {  
     let cwObj = cword.getStorageObject();
     let cwordText = JSON.stringify(cwObj);
-    // className="cw-cont"
+
     return (
       <div id="cw-params-cont" className="cw-params-cont">
         <textarea id="cw-export-text" className="cw-export-import-text"
@@ -113,7 +84,7 @@ const Param = (props) => {
   let suffix = na+'by'+nd;
   let boardClassName = 'cw-board-'+suffix;
   let cluesClassName = 'cw-clues-'+suffix;
-  // className="cw-cont"
+
   return (
     <div id="cw-params-cont" className="cw-params-cont">
       <div id="cw-params-board" className={boardClassName}>
@@ -141,8 +112,6 @@ const Param = (props) => {
       </div>
     </div>
   );
-  
-
 }
 
 export default Param;
