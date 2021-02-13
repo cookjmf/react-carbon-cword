@@ -13,7 +13,7 @@ class Play extends React.Component {
     super(props);
     this.state = {};
   }
-  
+
   render() {
     // console.log('Play : render : enter');
 

@@ -12,14 +12,14 @@ const ParamAcrossClues = (props) => {
   let textarea = createRef();
 
   useEffect(() => {
-    console.log('ParamAcrossClues : useEffect : enter');
+    // console.log('ParamAcrossClues : useEffect : enter');
     let elem = textarea.current;   
     if (elem != null) {
       let cword = props.cword;
 
-      console.log('paramTextareaSelected = '+cword.paramTextareaSelected);
-      console.log('paramAcrossCluesStart = '+cword.paramAcrossCluesStart);
-      console.log('paramAcrossCluesEnd = '+cword.paramAcrossCluesEnd);
+      // console.log('paramTextareaSelected = '+cword.paramTextareaSelected);
+      // console.log('paramAcrossCluesStart = '+cword.paramAcrossCluesStart);
+      // console.log('paramAcrossCluesEnd = '+cword.paramAcrossCluesEnd);
 
       if (cword.paramTextareaSelected === Util.TA_ACROSS_CLUES) { 
         elem.selectionStart = cword.paramAcrossCluesStart;

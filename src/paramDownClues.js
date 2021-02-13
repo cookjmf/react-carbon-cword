@@ -11,7 +11,7 @@ const ParamDownClues = (props) => {
   let textarea = createRef();
 
   useEffect(() => {
-    console.log('ParamDownClues : useEffect : enter');
+    // console.log('ParamDownClues : useEffect : enter');
     let elem = textarea.current;   
     if (elem != null) {
       let cword = props.cword;
