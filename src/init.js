@@ -5,214 +5,200 @@ import Name from './name';
 import Size from './size';
 import * as Util from './util';
 
-class Init extends React.Component {
+function Init(props) {
 
-  constructor(props) {
-    
-    super(props);
-    this.state = {};
-  }
-
-  renderCreate() {
+  const renderCreate = (props) => {
     console.log('Init : renderCreate : enter');
 
     return (
       <div id="cw-init-cont" 
       className="cw-cont" 
-      // style={ { 
-        // "display": "flex", 
-        // "height": 120, 
-        // "background-color": "MediumSeaGreen"
-      // } }
       > 
         <Action                
-          selected= { this.props.selectedAction }  
-          existingNames={ this.props.existingNames}  
-          onChange={ this.props.onChangeAction }
+          selected= { props.selectedAction }  
+          existingNames={ props.existingNames}  
+          onChange={ props.onChangeAction }
         />
         <NewName       
-          onChange={ this.props.onChangeNewName }
+          onChange={ props.onChangeNewName }
         />
         <Size   
-          selected={ this.props.selectedSize }   
-          onChange={ this.props.onChangeSize }
+          selected={ props.selectedSize }   
+          onChange={ props.onChangeSize }
         />
       </div>
     )
   }
 
-  renderCreateExample() {
+  const renderCreateExample = (props) => {
     console.log('Init : renderCreateExample : enter');
 
     return (
       <div id="cw-init-cont" className="cw-cont"> 
         <Action   
-          selected= { this.props.selectedAction }  
-          existingNames={ this.props.existingNames}               
-          onChange={ this.props.onChangeAction }
+          selected= { props.selectedAction }  
+          existingNames={ props.existingNames}               
+          onChange={ props.onChangeAction }
         />
         <Name    
-          existingNames={ this.props.existingNames}   
-          onChange={ this.props.onChangeName }
+          existingNames={ props.existingNames}   
+          onChange={ props.onChangeName }
         />
       </div>
     );
   }
 
-  renderDelete() {
+  const renderDelete = (props) => {
     console.log('Init : renderDelete : enter');
 
     return (
       <div id="cw-init-cont" className="cw-cont"> 
         <Action   
-          selected= { this.props.selectedAction }  
-          existingNames={ this.props.existingNames}               
-          onChange={ this.props.onChangeAction }
+          selected= { props.selectedAction }  
+          existingNames={ props.existingNames}               
+          onChange={ props.onChangeAction }
         />
         <Name    
-          existingNames={ this.props.existingNames}   
-          onChange={ this.props.onChangeName }
+          existingNames={ props.existingNames}   
+          onChange={ props.onChangeName }
         />
       </div>
     );
   }
 
-  renderPlay() {
+  const renderPlay = (props) => {
     console.log('Init : renderPlay : enter');
 
     return (
       <div id="cw-init-cont" className="cw-cont"> 
         <Action   
-          selected= { this.props.selectedAction }  
-          existingNames={ this.props.existingNames}               
-          onChange={ this.props.onChangeAction }
+          selected= { props.selectedAction }  
+          existingNames={ props.existingNames}               
+          onChange={ props.onChangeAction }
         />
         <Name    
-          existingNames={ this.props.existingNames}   
-          onChange={ this.props.onChangeName }
+          existingNames={ props.existingNames}   
+          onChange={ props.onChangeName }
         />
       </div>
     );
   }
 
-  renderUpdate() {
+  const renderUpdate = (props) => {
     console.log('Init : renderUpdate : enter');
 
     return (
       <div id="cw-init-cont" className="cw-cont"> 
         <Action   
-          selected= { this.props.selectedAction }  
-          existingNames={ this.props.existingNames}               
-          onChange={ this.props.onChangeAction }
+          selected= { props.selectedAction }  
+          existingNames={ props.existingNames}               
+          onChange={ props.onChangeAction }
         />
         <Name    
-          existingNames={ this.props.existingNames}   
-          onChange={ this.props.onChangeName }
+          existingNames={ props.existingNames}   
+          onChange={ props.onChangeName }
         />
       </div>
     );
   }
 
-  renderExport() {
+  const renderExport = (props) => {
     console.log('Init : renderExport : enter');
 
     return (
       <div id="cw-init-cont" className="cw-cont"> 
         <Action   
-          selected= { this.props.selectedAction }  
-          existingNames={ this.props.existingNames}               
-          onChange={ this.props.onChangeAction }
+          selected= { props.selectedAction }  
+          existingNames={ props.existingNames}               
+          onChange={ props.onChangeAction }
         />
         <Name    
-          existingNames={ this.props.existingNames}   
-          onChange={ this.props.onChangeName }
+          existingNames={ props.existingNames}   
+          onChange={ props.onChangeName }
         />
       </div>
     );
   }
 
-  renderImport() {
+  const renderImport = (props) => {
     console.log('Init : renderImport : enter');
 
     return (
       <div id="cw-init-cont" className="cw-cont"> 
         <Action   
-          selected= { this.props.selectedAction }  
-          existingNames={ this.props.existingNames}               
-          onChange={ this.props.onChangeAction }
+          selected= { props.selectedAction }  
+          existingNames={ props.existingNames}               
+          onChange={ props.onChangeAction }
         />
       </div>
     );
   }
 
-  renderInit() {
+  const renderInit = (props) => {
     console.log('Init : renderInit : enter');
 
     return (
       <div id="cw-init-cont" className="cw-cont"> 
         <Action       
-          selected={ this.props.selectedAction}
-          existingNames={ this.props.existingNames}
-          onChange={ this.props.onChangeAction }
+          selected={ props.selectedAction}
+          existingNames={ props.existingNames}
+          onChange={ props.onChangeAction }
         />
       </div>
     );
   }
 
-  render() {
-    console.log('Init : render : enter');
-    console.log('Init : render : props : '+JSON.stringify(this.props));
+  console.log('Init : enter');
+  console.log('Init : props : '+JSON.stringify(props));
 
-    let action = this.props.action;
-    let name = '';
-    if (this.props.name != null) {
-      name = this.props.name;
-    }
-    
-    if (action === Util.ACTION_CREATE) {
-      return this.renderCreate();
-    } else if (action === Util.ACTION_CREATE_EXAMPLE) {
-      if (name === '') {
-        return this.renderCreateExample();
-      } else {
-        return this.renderInit();
-      }
-    } else if (action === Util.ACTION_DELETE) {
-      if (name === '') {
-        return this.renderDelete();
-      } else {
-        return this.renderInit();
-      }
-    } else if (action === Util.ACTION_PLAY) {
-      if (name === '') {
-        return this.renderPlay();
-      } else {
-        return this.renderInit();
-      }
-    } else if (action === Util.ACTION_UPDATE) {
-      if (name === '') {
-        return this.renderUpdate();
-      } else {
-        return this.renderInit();
-      }
-    } else if (action === Util.ACTION_EXPORT) {
-      if (name === '') {
-        return this.renderExport();
-      } else {
-        return this.renderInit();
-      }
-    } else if (action === Util.ACTION_IMPORT) {
-      if (name === '') {
-        return this.renderImport();
-      } else {
-        return this.renderInit();
-      }
-    } else {
-      return this.renderInit();
-    }
-    
-    
+  let action = props.action;
+  let name = '';
+  if (props.name != null) {
+    name = props.name;
   }
+  
+  if (action === Util.ACTION_CREATE) {
+    return renderCreate(props);
+  } else if (action === Util.ACTION_CREATE_EXAMPLE) {
+    if (name === '') {
+      return renderCreateExample(props);
+    } else {
+      return renderInit(props);
+    }
+  } else if (action === Util.ACTION_DELETE) {
+    if (name === '') {
+      return renderDelete(props);
+    } else {
+      return renderInit(props);
+    }
+  } else if (action === Util.ACTION_PLAY) {
+    if (name === '') {
+      return renderPlay(props);
+    } else {
+      return renderInit(props);
+    }
+  } else if (action === Util.ACTION_UPDATE) {
+    if (name === '') {
+      return renderUpdate(props);
+    } else {
+      return renderInit(props);
+    }
+  } else if (action === Util.ACTION_EXPORT) {
+    if (name === '') {
+      return renderExport(props);
+    } else {
+      return renderInit(props);
+    }
+  } else if (action === Util.ACTION_IMPORT) {
+    if (name === '') {
+      return renderImport(props);
+    } else {
+      return renderInit(props);
+    }
+  } else {
+    return renderInit(props);
+  }
+    
 }
 
 export default Init;

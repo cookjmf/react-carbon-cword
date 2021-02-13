@@ -2,79 +2,69 @@ import React from 'react';
 import 'carbon-components/css/carbon-components.min.css';
 import { Dropdown } from 'carbon-components-react';
 
-class Name extends React.Component {
+function Name(props) {
 
-  constructor(props) {
-    
-    super(props);
-    this.state = {};
-  }
+  console.log('Name : enter');
+
+  console.log('Name : props : '+JSON.stringify(props));
+
+  let selectedName = props.selected;
   
-  render() {
-    console.log('Name : render : enter');
-
-    console.log('Name : render : props : '+JSON.stringify(this.props));
-
-    let selectedName = this.props.selected;
-    
-    if (selectedName == null || selectedName.length === 0) {
-      selectedName = 'Select a name ...';
-    } 
+  if (selectedName == null || selectedName.length === 0) {
+    selectedName = 'Select a name ...';
+  } 
 
 
-    let existingNames = this.props.existingNames;
-    
-    if (existingNames == null) {
-      existingNames = [];
-    }
-
-    let names = [];
-    
-    for (let i=0; i<existingNames.length; i++) {
-      names.push(existingNames[i]);
-    }
-    names.sort();
-
-    let selectedItem = null;
-
-    const items = [];
-    for (let i=0; i<names.length; i++) {
-      let name = names[i];
-      let item = {
-        id: 'name-'+i,
-        text: name,
-        value: name,
-      }
-
-      if (name === selectedName) {
-        selectedItem = item;
-      }
-
-
-      items.push(item);
-    }
-
-    return (
-      <div className="cw-dropdown-container"
-      // debug     
-      // style={ { 
-      //   } }
-        >
-        <Dropdown
-          name="cw-names" 
-          id="cw-names"        
-          titleText="Name"    
-          label={selectedName}
-          selectedItem={selectedItem}   
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          size="sm"
-          onChange={(ev) => this.props.onChange(ev)}
-        />
-      </div>
-    ); 
-    
+  let existingNames = props.existingNames;
+  
+  if (existingNames == null) {
+    existingNames = [];
   }
+
+  let names = [];
+  
+  for (let i=0; i<existingNames.length; i++) {
+    names.push(existingNames[i]);
+  }
+  names.sort();
+
+  let selectedItem = null;
+
+  const items = [];
+  for (let i=0; i<names.length; i++) {
+    let name = names[i];
+    let item = {
+      id: 'name-'+i,
+      text: name,
+      value: name,
+    }
+
+    if (name === selectedName) {
+      selectedItem = item;
+    }
+
+
+    items.push(item);
+  }
+
+  return (
+    <div className="cw-dropdown-container"
+      >
+      <Dropdown
+        name="cw-names" 
+        id="cw-names"        
+        titleText="Name"    
+        label={selectedName}
+        selectedItem={selectedItem}   
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        size="sm"
+        onChange={(ev) => props.onChange(ev)}
+      />
+    </div>
+  ); 
+    
+  
 }
 
 export default Name;

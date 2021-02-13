@@ -35,7 +35,7 @@ background: #FFFFFF;
 margin: 30px 0 0 30px;
 } 
 
-/* Crossword dropdowns (actions, names, sizes) */
+/* Crossword init dropdowns/inputs (actions, names, sizes) */
 .cw-dropdown-container{
 width: 250px;
 padding-right: 30px; 

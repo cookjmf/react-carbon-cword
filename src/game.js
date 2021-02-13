@@ -1315,7 +1315,8 @@ class Game extends React.Component {
           existingNames={ this.state.existingNames }
           onChangeAction={ this.onChangeAction }
         />
-        <Message         
+        <Message 
+          className="cw-message"        
           msg={ this.state.msg }
           onClickMessageClose={ this.onClickMessageClose }
           onClickMessageConfirm={ this.onClickMessageConfirm }
