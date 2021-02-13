@@ -1,16 +1,10 @@
 import React from 'react';
 import * as Util from './util';
 
-class PlayCellBg extends React.Component {
+const PlayCellBg = (props) => {
 
-  constructor(props) {
-    
-    super(props);
-    this.state = {};
-  }
+  const renderCell = (boardArrayKey, cword) => {
 
-  renderCell(boardArrayKey, cword) {
-    // console.log('PlayCellBg : renderCell : enter : boardArrayKey : '+boardArrayKey);
     let y = Util.row(boardArrayKey);
     let x = Util.column(boardArrayKey);
 
@@ -50,31 +44,23 @@ class PlayCellBg extends React.Component {
         </>   
       );
 
-    }
-    
+    }   
   }
-  
-  render() {
-    // console.log('PlayCellBg : render : enter');
 
-    // key is "special", even though its been passed in - it does not show in props !!
+  let cword = props.cword;
 
-    let cword = this.props.cword;
+  let boardArrayKey = props.boardArrayKey;
+  if (boardArrayKey == null) {
+    return <p>E101</p>
+  } else {
 
-    let boardArrayKey = this.props.boardArrayKey;
-    if (boardArrayKey == null) {
-      return <p>E101</p>
-    } else {
-      // console.log('ParamCell : render : boardArrayKey : '+boardArrayKey);
-
-      return (
-        <>
-        {this.renderCell(boardArrayKey, cword)}
-        </>
-      );
-    }
-    
+    return (
+      <>
+      {renderCell(boardArrayKey, cword)}
+      </>
+    );
   }
+    
 }
 
 export default PlayCellBg;

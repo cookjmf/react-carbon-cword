@@ -4,116 +4,106 @@ import PlayBoardBg from './playBoardBg';
 import PlayBoardLabel from './playBoardLabel';
 import PlayAcrossClues from './playAcrossClues';
 import PlayDownClues from './playDownClues';
-// import * as Util from './util';
 
-class Play extends React.Component {
+const Play = (props) => {
 
-  constructor(props) {
-    
-    super(props);
-    this.state = {};
+  let cword = props.cword;
+
+  let na = cword.getNumberedMaxAcross();
+  let nd = cword.getNumberedMaxDown();
+
+  let suffix = na+'by'+nd;
+  let boardClassName = 'cw-board-'+suffix;
+  let cluesClassName = 'cw-clues-'+suffix;
+
+  let bgClassName = boardClassName+" cw-itembgs";
+  let labelClassName = boardClassName+" cw-labels";
+
+  let style1 = {
+    'display': 'none'
+  };
+  let selectedClueText = "";
+  let selectedClue = cword.selectedClue;
+  if (selectedClue != null) {
+    style1 = {
+      'display': 'block'
+    };
+    selectedClueText = selectedClue.getSelectedText();
   }
 
-  render() {
-    // console.log('Play : render : enter');
+  return (
+    <div id="cw-cont-play" >
 
-    let cword = this.props.cword;
+      <div id="cw-selclue" className="cw-clues-current"
+      style={style1} >
+        {selectedClueText}
+      </div>
 
-    let na = cword.getNumberedMaxAcross();
-    let nd = cword.getNumberedMaxDown();
+      <div id="cw-board" className={boardClassName}>
 
-    let suffix = na+'by'+nd;
-    let boardClassName = 'cw-board-'+suffix;
-    let cluesClassName = 'cw-clues-'+suffix;
+        <PlayBoard
+          cword={ cword}   
+          updateTimestamp={ props.updateTimestamp}                  
+          onClickPlayCell={ props.onClickPlayCell }
+          onChangePlayCell={ props.onChangePlayCell }
+          onKeyUpPlayCell={ props.onKeyUpPlayCell }
+          onKeyDownPlayCell={ props.onKeyDownPlayCell }
+        >
+        </PlayBoard>
 
-    let bgClassName = boardClassName+" cw-itembgs";
-    let labelClassName = boardClassName+" cw-labels";
+        <div id="cw-itembgs" className={bgClassName}>
 
-    let style1 = {
-      'display': 'none'
-    };
-    let selectedClueText = "";
-    let selectedClue = cword.selectedClue;
-    if (selectedClue != null) {
-      style1 = {
-        'display': 'block'
-      };
-      selectedClueText = selectedClue.getSelectedText();
-    }
-    // className="cw-cont"
-    return (
-      <div id="cw-cont-play" >
+          <PlayBoardBg
+            cword={ cword}
+          >
+          </PlayBoardBg>
 
-        <div id="cw-selclue" className="cw-clues-current"
-        style={style1} >
-          {selectedClueText}
         </div>
 
-        <div id="cw-board" className={boardClassName}>
+        <div id="cw-labels" className={labelClassName}>
 
-          <PlayBoard
-            cword={ cword}   
-            updateTimestamp={ this.props.updateTimestamp}                  
-            onClickPlayCell={ this.props.onClickPlayCell }
-            onChangePlayCell={ this.props.onChangePlayCell }
-            onKeyUpPlayCell={ this.props.onKeyUpPlayCell }
-            onKeyDownPlayCell={ this.props.onKeyDownPlayCell }
+          <PlayBoardLabel
+            cword={ cword}
           >
-          </PlayBoard>
+          </PlayBoardLabel>
 
-          <div id="cw-itembgs" className={bgClassName}>
+        </div>
 
-            <PlayBoardBg
-              cword={ cword}
-            >
-            </PlayBoardBg>
+        <div id="cw-clues" className={cluesClassName}>
+
+          <div id="cw-clues-list-across" className="cw-clues-list-across cw-clues-list">
+            <div id="cw-clues-list-across-title" className="cw-clues-list-title">
+            Across
+            </div>
+
+            <PlayAcrossClues
+              cword={ cword} 
+              onClickAcrossClue={ props.onClickAcrossClue }
+            >         
+            </PlayAcrossClues>
 
           </div>
 
-          <div id="cw-labels" className={labelClassName}>
+          <hr>
+          </hr>
 
-            <PlayBoardLabel
-              cword={ cword}
+          <div id="cw-clues-list-down" className="cw-clues-list-down cw-clues-list">
+            <div id="cw-clues-list-down-title" className="cw-clues-list-title">
+              Down
+            </div>
+
+            <PlayDownClues
+              cword={ cword} 
+              onClickDownClue={ props.onClickDownClue }
             >
-            </PlayBoardLabel>
-
-          </div>
-
-          <div id="cw-clues" className={cluesClassName}>
-
-            <div id="cw-clues-list-across" className="cw-clues-list-across cw-clues-list">
-              <div id="cw-clues-list-across-title" className="cw-clues-list-title">
-              Across
-              </div>
-
-              <PlayAcrossClues
-                cword={ cword} 
-                onClickAcrossClue={ this.props.onClickAcrossClue }
-              >         
-              </PlayAcrossClues>
-
-            </div>
-
-            <hr>
-            </hr>
-
-            <div id="cw-clues-list-down" className="cw-clues-list-down cw-clues-list">
-              <div id="cw-clues-list-down-title" className="cw-clues-list-title">
-                Down
-              </div>
-
-              <PlayDownClues
-                cword={ cword} 
-                onClickDownClue={ this.props.onClickDownClue }
-              >
-              </PlayDownClues>
-            </div>
+            </PlayDownClues>
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 
-  }
+  
 
 }
 

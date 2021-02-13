@@ -1,16 +1,10 @@
 import React from 'react';
 import * as Util from './util';
 
-class PlayCellLabel extends React.Component {
+const PlayCellLabel = (props) => {
 
-  constructor(props) {
+  const renderCell = (boardArrayKey, cellMap) => {
     
-    super(props);
-    this.state = {};
-  }
-
-  renderCell(boardArrayKey, cellMap) {
-    // console.log('PlayCellLabel : renderCell : enter : boardArrayKey : '+boardArrayKey);
     let y = Util.row(boardArrayKey);
     let x = Util.column(boardArrayKey);
 
@@ -45,26 +39,20 @@ class PlayCellLabel extends React.Component {
     
   }
   
-  render() {
-    // console.log('PlayCellLabel : render : enter');
+  let cword = props.cword;
+  let cellMap = cword.cellMap;
+  let boardArrayKey = props.boardArrayKey;
+  if (boardArrayKey == null) {
+    return <p>E101</p>
+  } else {
 
-    // key is "special", even though its been passed in - it does not show in props !!
-    let cword = this.props.cword;
-    let cellMap = cword.cellMap;
-    let boardArrayKey = this.props.boardArrayKey;
-    if (boardArrayKey == null) {
-      return <p>E101</p>
-    } else {
-      // console.log('PlayCellLabel : render : boardArrayKey : '+boardArrayKey);
-
-      return (
-        <>
-        {this.renderCell(boardArrayKey, cellMap)}
-        </>
-      );
-    }
-    
+    return (
+      <>
+      {renderCell(boardArrayKey, cellMap)}
+      </>
+    );
   }
+
 }
 
 export default PlayCellLabel;
