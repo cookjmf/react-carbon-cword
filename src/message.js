@@ -3,15 +3,12 @@ import React from 'react';
 import 'carbon-components/css/carbon-components.min.css';
 import { InlineNotification, NotificationActionButton, Button } from 'carbon-components-react';
 
-class Message extends React.Component {
+const Message = (props) => {
 
-  constructor(props) {
+  console.log('Message : enter : render');
+  console.log('Message : render : props : ' + JSON.stringify(props));
 
-    super(props);
-    this.state = {};
-  }
-
-  renderWithConfirm(fullText, kind, confirmText, confirmId) {
+  const renderWithConfirm = (fullText, kind, confirmText, confirmId) => {
 
     if (fullText != null && fullText.length > 0) {
 
@@ -21,12 +18,12 @@ class Message extends React.Component {
             kind={kind}
             title={fullText}
             style={{ "width": "fit-content" }} 
-            onCloseButtonClick={() => this.props.onClickMessageClose()}
+            onCloseButtonClick={() => props.onClickMessageClose()}
             
             actions={
               <NotificationActionButton
                 id={confirmId}
-                onClick={(ev) => this.props.onClickMessageConfirm(ev.target.id)}
+                onClick={(ev) => props.onClickMessageConfirm(ev.target.id)}
               >
 
                 {confirmText}
@@ -48,7 +45,7 @@ class Message extends React.Component {
           <Button
             kind="primary"            
             id={confirmId}
-            onClick={(ev) => this.props.onClickMessageConfirm(ev.target.id)}
+            onClick={(ev) => props.onClickMessageConfirm(ev.target.id)}
           >
           {confirmText}
           </Button>
@@ -59,48 +56,43 @@ class Message extends React.Component {
       
   }
 
-  renderSimple(fullText, kind) {
-
+  const renderSimple = (fullText, kind) => {
     return (
       <div id="cw-message-cont" className="cw-message-cont">
         <InlineNotification
           kind={kind}
           title={fullText}
           style={{ "width": "fit-content" }} 
-          onCloseButtonClick={() => this.props.onClickMessageClose()}
+          onCloseButtonClick={() => props.onClickMessageClose()}
           >
         </InlineNotification>
       </div>
     );
   }
 
-  render() {
-    console.log('Message : enter : render');
-    console.log('Message : render : props : ' + JSON.stringify(this.props));
+  let msg = props.msg;
+  
+  if (msg == null) {
+    return (
+      <div id="cw-message-cont" className="cw-message-cont">
+      </div>
+    );
+  } else {
 
-    let msg = this.props.msg;
-    
-    if (msg == null) {
-      return (
-        <div id="cw-message-cont" className="cw-message-cont">
-        </div>
-      );
+    let fullText = msg.fullText();
+    let confirmText = msg.confirmText;
+    let confirmId = msg.confirmId;
+    let kind = msg.kind();
+
+    if (confirmText != null && confirmText.length > 0) {
+
+      return renderWithConfirm(fullText, kind, confirmText, confirmId);
+
     } else {
-
-      let fullText = msg.fullText();
-      let confirmText = msg.confirmText;
-      let confirmId = msg.confirmId;
-      let kind = msg.kind();
-
-      if (confirmText != null && confirmText.length > 0) {
-
-        return this.renderWithConfirm(fullText, kind, confirmText, confirmId);
-
-      } else {
-        return this.renderSimple(fullText, kind);
-      }
+      return renderSimple(fullText, kind);
     }
   }
+  
 }
 
 export default Message;

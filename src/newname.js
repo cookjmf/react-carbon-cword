@@ -2,7 +2,8 @@ import React from 'react';
 import 'carbon-components/css/carbon-components.min.css';
 import { TextInput } from 'carbon-components-react';
 
-function NewName(props) {
+// function NewName(props) {
+const NewName = (props) => {
 
   console.log('NewName : enter');
 

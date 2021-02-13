@@ -2,7 +2,8 @@ import React from 'react';
 import 'carbon-components/css/carbon-components.min.css';
 import { Dropdown } from 'carbon-components-react';
 
-function Name(props) {
+// function Name(props) {
+const Name = (props) => {
 
   console.log('Name : enter');
 

@@ -5,9 +5,12 @@ import Name from './name';
 import Size from './size';
 import * as Util from './util';
 
-function Init(props) {
+const Init = (props) => {
 
-  const renderCreate = (props) => {
+  console.log('Init : enter');
+  console.log('Init : props : '+JSON.stringify(props));
+
+  const renderCreate = () => {
     console.log('Init : renderCreate : enter');
 
     return (
@@ -30,7 +33,7 @@ function Init(props) {
     )
   }
 
-  const renderCreateExample = (props) => {
+  const renderCreateExample = () => {
     console.log('Init : renderCreateExample : enter');
 
     return (
@@ -48,7 +51,7 @@ function Init(props) {
     );
   }
 
-  const renderDelete = (props) => {
+  const renderDelete = () => {
     console.log('Init : renderDelete : enter');
 
     return (
@@ -66,7 +69,7 @@ function Init(props) {
     );
   }
 
-  const renderPlay = (props) => {
+  const renderPlay = () => {
     console.log('Init : renderPlay : enter');
 
     return (
@@ -84,7 +87,7 @@ function Init(props) {
     );
   }
 
-  const renderUpdate = (props) => {
+  const renderUpdate = () => {
     console.log('Init : renderUpdate : enter');
 
     return (
@@ -102,7 +105,7 @@ function Init(props) {
     );
   }
 
-  const renderExport = (props) => {
+  const renderExport = () => {
     console.log('Init : renderExport : enter');
 
     return (
@@ -120,7 +123,7 @@ function Init(props) {
     );
   }
 
-  const renderImport = (props) => {
+  const renderImport = () => {
     console.log('Init : renderImport : enter');
 
     return (
@@ -134,7 +137,7 @@ function Init(props) {
     );
   }
 
-  const renderInit = (props) => {
+  const renderInit = () => {
     console.log('Init : renderInit : enter');
 
     return (
@@ -148,8 +151,7 @@ function Init(props) {
     );
   }
 
-  console.log('Init : enter');
-  console.log('Init : props : '+JSON.stringify(props));
+
 
   let action = props.action;
   let name = '';
@@ -158,45 +160,45 @@ function Init(props) {
   }
   
   if (action === Util.ACTION_CREATE) {
-    return renderCreate(props);
+    return renderCreate();
   } else if (action === Util.ACTION_CREATE_EXAMPLE) {
     if (name === '') {
-      return renderCreateExample(props);
+      return renderCreateExample();
     } else {
-      return renderInit(props);
+      return renderInit();
     }
   } else if (action === Util.ACTION_DELETE) {
     if (name === '') {
-      return renderDelete(props);
+      return renderDelete();
     } else {
-      return renderInit(props);
+      return renderInit();
     }
   } else if (action === Util.ACTION_PLAY) {
     if (name === '') {
-      return renderPlay(props);
+      return renderPlay();
     } else {
-      return renderInit(props);
+      return renderInit();
     }
   } else if (action === Util.ACTION_UPDATE) {
     if (name === '') {
-      return renderUpdate(props);
+      return renderUpdate();
     } else {
-      return renderInit(props);
+      return renderInit();
     }
   } else if (action === Util.ACTION_EXPORT) {
     if (name === '') {
-      return renderExport(props);
+      return renderExport();
     } else {
-      return renderInit(props);
+      return renderInit();
     }
   } else if (action === Util.ACTION_IMPORT) {
     if (name === '') {
-      return renderImport(props);
+      return renderImport();
     } else {
-      return renderInit(props);
+      return renderInit();
     }
   } else {
-    return renderInit(props);
+    return renderInit();
   }
     
 }

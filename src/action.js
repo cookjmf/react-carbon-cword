@@ -4,7 +4,7 @@ import * as Util from './util';
 import 'carbon-components/css/carbon-components.min.css';
 import { Dropdown } from 'carbon-components-react';
 
-function Action(props) {
+const Action = (props) => {
 
   console.log('Action : enter');
 
