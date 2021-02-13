@@ -4,7 +4,6 @@ import * as Util from './util';
 import 'carbon-components/css/carbon-components.min.css';
 import { Dropdown } from 'carbon-components-react';
 
-// function Size(props) {
 const Size = (props) => {
 
   console.log('Size : enter');
