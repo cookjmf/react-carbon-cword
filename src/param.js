@@ -21,7 +21,7 @@ const Param = (props) => {
       console.log('paramImportStart = '+cword.paramImportStart);
       console.log('paramImportEnd = '+cword.paramImportEnd);
 
-      if (cword.paramTextareaSelected === Util.TA_IMPORT) { 
+      if (cword.paramTextareaSelected === Util.TEXTAREA_IMPORT) { 
         elem.selectionStart = cword.paramImportStart;
         elem.selectionEnd = cword.paramImportEnd;
         elem.focus();

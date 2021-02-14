@@ -355,7 +355,7 @@ const Game = React.memo((props) => {
       atext = Util.convertCluesDash(atext);
 
       cword.horizClues = atext;
-      cword.paramTextareaSelected = Util.TA_ACROSS_CLUES;
+      cword.paramTextareaSelected = Util.TEXTAREA_ACROSS_CLUES;
       cword.paramAcrossCluesStart = elem.selectionStart;
       cword.paramAcrossCluesEnd = elem.selectionEnd;
 
@@ -387,7 +387,7 @@ const Game = React.memo((props) => {
 
       cword.vertClues = dtext;
 
-      cword.paramTextareaSelected = Util.TA_DOWN_CLUES;
+      cword.paramTextareaSelected = Util.TEXTAREA_DOWN_CLUES;
       cword.paramDownCluesStart = elem.selectionStart;
       cword.paramDownCluesEnd = elem.selectionEnd;
 
@@ -526,7 +526,7 @@ const Game = React.memo((props) => {
 
       cword.importJson = value;
 
-      cword.paramTextareaSelected = Util.TA_IMPORT;
+      cword.paramTextareaSelected = Util.TEXTAREA_IMPORT;
       cword.paramImportStart = elem.selectionStart;
       cword.paramImportEnd = elem.selectionEnd;
 

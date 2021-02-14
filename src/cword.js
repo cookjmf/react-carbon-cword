@@ -120,14 +120,14 @@ class Cword {
     for (let y=1; y<=maxDown; y++) {
       for (let x=1; x<=maxAcross; x++) {
         var cellKey = Util.cellKey(y,x);
-        // console.log('cell->toObject .... cellKey : ['+cellKey+']');
+        
         var cell = this.cellMap.get(cellKey);
         if (cell != null) {
           let val = cell.value;
           if (val != null && val.length > 0) {
             let cellId = Util.toCellId(y, x);
             cellValues[cellId] = val;
-            // console.log('............ cell->toObject : ['+cellKey+'] : ['+val+']');
+            
           }        
         }
       }
@@ -170,17 +170,6 @@ class Cword {
     }
     this.vertClues = cwObj.vertClues;
 
-    // if ( !cwObj.hasOwnProperty('blanks') ) {
-    //   this.msgMgr.addError("No blanks.");
-    //   return;
-    // }
-
-    // if ( !cwObj.hasOwnProperty('cellValues') ) {
-    //   // this.msgMgr.addError("No cellValues.");
-    //   // return;
-    //   cwObj.cellValues = {};
-    // }
-
     this.setupCellMap(cwObj.maxAcross, cwObj.maxDown, cwObj.blanks, cwObj.cellValues);
 
   }
@@ -205,11 +194,11 @@ class Cword {
           if (valueMap.has(cellKey)) {
             cell.value = valueMap.get(cellKey);
           }
-          // console.log('Setup cell at '+cellKey);
+          
         }
       }
     }
-    // console.log('Setup '+cellMap.size+' cells');
+    
     this.cellMap = cellMap;
   }
   
@@ -224,33 +213,33 @@ class Cword {
       if (line.length === 0) {
         continue;
       }
-      // console.log('BlankLine#'+(i+1)+' ['+line+']');
+      
       let lineParts = line.split(' ');
       if (lineParts.length !== 2) {
-        // console.log("Bad # parts, need 2, but have : "+lineParts.length);
+        console.log("ERROR : Bad # parts, need 2, but have : "+lineParts.length);
       }
       let yVal = 1 * lineParts[0];
       if (yVal < 1) {
-        // console.log('getBlankMap : y is < 1 : '+yVal);
+        console.log('ERROR : getBlankMap : y is < 1 : '+yVal);
       }
       if (yVal > maxDown) {
-        // console.log('getBlankMap : y is > maxDown : '+yVal);
+        console.log('ERROR : getBlankMap : y is > maxDown : '+yVal);
       }
       let xVals = lineParts[1];
       let xParts = xVals.split(',');
       for (let j = 0; j < xParts.length; j++) {
         let xVal = 1 * xParts[j];
         if (xVal < 1) {
-          // console.log('getBlankMap : x is < 1 : '+xVal);
+          console.log('ERROR : getBlankMap : x is < 1 : '+xVal);
         }
         if (xVal > maxAcross) {
-          // console.log('getBlankMap : x is > maxAcross : '+xVal);
+          console.log('ERROR : getBlankMap : x is > maxAcross : '+xVal);
         }
  
-        // let key = Util.toCellId(yVal, xVal);
+        
         let key = Util.cellKey(yVal, xVal);
         blankMap.set(key, key);
-        // console.log('Setup blank at : '+key);
+        
       }   
     }
     return blankMap;
@@ -264,18 +253,17 @@ class Cword {
     }
     for (let y=1; y<=maxDown; y++) {
       for (let x=1; x<=maxAcross; x++) {
-        // key in cellValues is aa format aka cellid
+
         let cellId = Util.toCellId(y,x);
-        // console.log('cell->toMap .... cellId : ['+cellId+']');
 
         let val = cellValues[cellId];
         if (val != null && val.length > 0) {
           let cellKey = Util.cellKey(y,x);
           if (!valueMap.has(cellKey)) {
             valueMap.set(cellKey, val);
-            // console.log('............ cell->toMap : ['+cellKey+'] : ['+val+']');
+            
           } else {
-            // console.log('Dup value from CELL_VALUES for : ['+cellKey+']');
+            console.log('ERROR : Dup value from CELL_VALUES for : ['+cellKey+']');
           }
         }      
       }
@@ -284,12 +272,9 @@ class Cword {
   }
 
   toggleParamCell(id) {
-    // console.log('Cword : toggleParamCell : enter : id : '+id);
-
+   
     // get the current state of cells
     let cellMap = this.cellMap;
-
-    // toggle the cell in cellMap : key is y.x
 
     if (!cellMap.has(id)) {
       // its a blank so make not a blank
@@ -342,9 +327,7 @@ class Cword {
     let msg = this.msgMgr.firstMsg();
     return msg;
 
-  
   }
-
 
   buildForPlay() {
 
@@ -390,13 +373,12 @@ class Cword {
   
     } 
 
-
     return msg;
   
   }
 
   buildGrid() {
-    // this.initCellMap();
+
     this.initAcrossClues();
     this.initDownClues();
     
@@ -426,14 +408,13 @@ class Cword {
   
     // setup across clues
     const acrossLines = this.getLines(maxAcross, this.horizClues, 'across');
-    // console.log('Setup '+acrossLines.length+' acrossLines');
   
     this.validateClueLines('across', acrossLines, maxDown);
   
     for (var i=0; i<acrossLines.length; i++) {
       var line = acrossLines[i];
       line = line.trim();
-      // console.log('clue across line : '+(i+1)+' ...['+line+']');
+
       var lineParts = line.split(sepRe);
       var first = lineParts[0];
       var m = ''+(i+1);
@@ -452,7 +433,7 @@ class Cword {
             this.validateClueText('Across clue line ( '+i+1+' ) \n - clue ( '+num+' )\n - delim ( '+delim+' )' , ct);
   
             var cid = m+'.'+num;
-            // console.log('across clue: '+cid+' ...['+ct+'] ['+delim+']');
+
             var clue = new Clue(i+1, 0, true, cid, '', ct+''+delim, num);
             var list = acrossClueMap.get(m);
             if (list == null) {
@@ -460,7 +441,7 @@ class Cword {
               acrossClueMap.set(m, list);
             }
             list.push(clue);
-            // console.log('-------> '+this.name+' --> For row ['+m+'] added across clue#'+list.length+' ['+clue.text+']');
+
           }
         }
       } else {
@@ -473,17 +454,17 @@ class Cword {
     for (var y=1; y<=maxAcross; y++) {
       var cList = acrossClueMap.get(''+y);
       if (cList == null) {
-        // console.log('No clues when y='+y);
+        
         continue;
       }
-      // console.log('For y='+y+' ... #clues='+cList.length);
+      
       var currentClue = null;
       var disp = -1;
   
       var cluesMatched = 0;
   
       for (var x=1; x<=maxDown; x++) {
-        var cellKey = Util.cellKey(y,x); // x+'.'+y;
+        var cellKey = Util.cellKey(y,x); 
   
         // work out start position and length of each clue
         var cell = this.cellMap.get(cellKey);
@@ -497,14 +478,12 @@ class Cword {
           }
   
           // skip if only 1 letter long
-          // var cellKey2 = (x+1)+'.'+y;
           var cellKey2 = Util.cellKey(y, x+1); 
           var cell2 = this.cellMap.get(cellKey2);
           if (cell2 == null) {
             continue;
           }
   
-          // inc the disp
           disp++;
                       
           currentClue = cList[disp];
@@ -519,7 +498,6 @@ class Cword {
   
           currentClue.firstCell = cell;
           currentClue.x = x;
-          // console.log('Across Clue : at '+cellKey+ ' : ['+currentClue.text+']');
           currentClue.answerLen++;
   
           cell.acrossValue = 'X';
@@ -530,28 +508,22 @@ class Cword {
         } else {
   
           // cell is blank 
-          if (currentClue != null) {
-            // console.log('Len of Across clue : '+currentClue.answerLen);
-          }
           currentClue = null;
         }
       }
   
       // end of row
-      if (currentClue != null) {
-        // console.log('Len of Across clue : '+currentClue.answerLen);
-      }
   
       if (cluesMatched === cList.length) {
-        // console.log('all clues matched ('+cluesMatched+')');
+
       } else if (cluesMatched < cList.length) {
-        // console.log('NOT all clues matched. There are ('+cList.length+') but only '+cluesMatched+' fit in grid'); 
+
         this.msgMgr.addError('Invalid across clues for grid.',          
               'Unused clues on row '+y+'.\n'+
               'There are '+cList.length+' clues on row '+y+' but only '+cluesMatched+' fit in grid\n'
               );     
       } else {
-        // console.log('Too many clues matched. There are ('+cList.length+') however '+cluesMatched+' fit in grid'); 
+
         this.msgMgr.addError('Invalid across clues for grid.',          
               'Too many clues used on row '+y+'\n'
               ); 
@@ -572,8 +544,6 @@ class Cword {
     // setup down clues
     const downLines = this.getLines(maxAcross, this.vertClues, 'down');
   
-    // console.log('Setup '+downLines.length+' downLines');
-  
     this.validateClueLines('down', downLines, maxAcross);
   
     var sepRe = this.getClueRegExp();
@@ -581,7 +551,7 @@ class Cword {
     for (var i=0; i<downLines.length; i++) {
       var line = downLines[i];
       line = line.trim();
-      // console.log('clue down line : '+(i+1)+' ...['+line+']');
+      
       var lineParts = line.split(sepRe);
       var first = lineParts[0];
       var m = ''+(i+1);
@@ -601,7 +571,7 @@ class Cword {
             this.validateClueText('Down clue line ( '+i+1+' ) clue ( '+num+' ) delim ('+delim+' )' , ct);
   
             var cid = m+'.'+num;
-            // console.log('down clue: '+cid+' ...['+ct+'] ['+delim+']');
+            
             var clue = new Clue(0, i+1, false, cid, '', ct+''+delim, num);
             var list = downClueMap.get(m);
             if (list == null) {
@@ -609,7 +579,7 @@ class Cword {
               downClueMap.set(m, list);
             }
             list.push(clue);
-            // console.log('-------> '+this.name+' --> For column ['+m+'] added down clue#'+list.length+' ['+clue.text+']');
+            
           }
         }
       } else {
@@ -622,10 +592,10 @@ class Cword {
     for (var x=1; x<=maxAcross; x++) {
       var cList = downClueMap.get(''+x);
       if (cList == null) {
-        // console.log('No clues when x='+x);
+       
         continue;
       }
-      // console.log('For x='+x+' ... #clues='+cList.length);
+      
   
       var currentClue = null;
       var disp = -1;
@@ -633,7 +603,7 @@ class Cword {
       var cluesMatched = 0;
   
       for (var y=1; y<=maxDown; y++) {
-        // var cellKey = x+'.'+y;
+        
         var cellKey = Util.cellKey(y,x); 
                   
         // work out start position and length of each clue
@@ -652,13 +622,12 @@ class Cword {
           }
   
           // skip if only 1 letter long
-          // var cellKey2 = x+'.'+(y+1);
           var cellKey2 = Util.cellKey(y+1,x); 
           var cell2 = this.cellMap.get(cellKey2);
           if (cell2 == null) {
             continue;
           }
-          // inc the disp
+          
           disp++;
   
           currentClue = cList[disp];
@@ -673,7 +642,7 @@ class Cword {
           }                                
           currentClue.firstCell = cell;
           currentClue.y = y;
-          // console.log('Down Clue : at '+cellKey+ ' : ['+currentClue.text+']');
+          
           currentClue.answerLen++;
                       
           cell.downValue = 'X';
@@ -685,28 +654,22 @@ class Cword {
   
         } else {
           // cell is blank 
-          if (currentClue != null) {
-            // console.log('Len of Down clue : '+currentClue.answerLen);
-          }
           currentClue = null;
         }
       }
   
       // end of row
-      if (currentClue != null) {
-        // console.log('Len of Down clue : '+currentClue.answerLen);
-      }
   
       if (cluesMatched === cList.length) {
-        // console.log('all clues matched ('+cluesMatched+')');
+        
       } else if (cluesMatched < cList.length) {
-        // console.log('NOT all clues matched. There are ('+cList.length+') but only '+cluesMatched+' fit in grid'); 
+        
         this.msgMgr.addError('Invalid down clues for grid.',          
               'Unused clues on column '+x+'.\n'+
               'There are '+cList.length+' clues on column '+x+' but only '+cluesMatched+' fit in grid\n'
               );     
       } else {
-        // console.log('Too many clues matched. There are ('+cList.length+') however '+cluesMatched+' fit in grid');  
+        
         this.msgMgr.addError('Invalid down clues for grid.',          
               'Too many clues used on column '+x+'\n'
               ); 
@@ -748,15 +711,13 @@ class Cword {
   }
 
   getLines(num, clues, dir) {    
-    // var errMsgs = [];
+    
     var lines = [];
     var p1 = 0;
     var p2 = -1;
     // go 1 pass the max to find errors
     for (let i=1; i<=num+1; i++) {
-      if (i === (num+1)) {
-        // console.log('On the line after last legal line');
-      }
+
       var s1 = i+'. ';
       var s2 = (i+1)+'. ';
       p1 = clues.indexOf(s1, p2);
@@ -800,7 +761,7 @@ class Cword {
       // charCodeAt : returns an integer between 0 and 65535 representing the UTF-16 code unit at the given index.
       var n = s.charCodeAt(i);
       var c = s[i];
-      // console.log('C=['+c+'] A=['+n+']');
+      
       if (n >=32 && n <= 127) {
         // normal ascii set (not control chars)
       } else if (n >=128 && n <= 800) {
@@ -817,8 +778,7 @@ class Cword {
 
   setupClueLinesInputFormat() {
 
-    // target format:
-    // (Y,X,A/D,ClueId,Answer,Clue)
+    // target format: (Y,X,A/D,ClueId,Answer,Clue)
           
     var clues = '';
     var numAcrossClues = 0;
@@ -826,7 +786,7 @@ class Cword {
     var firstCellKey = '';
     for (var y=1; y<=this.getMaxDown(); y++) {
       for (var x=1; x<=this.getMaxAcross(); x++) {
-        // var cellKey = x+'.'+y;
+        
         var cellKey = Util.cellKey(y,x); // x+'.'+y;
         var cell = this.cellMap.get(cellKey);
         if (cell != null) {
@@ -836,7 +796,7 @@ class Cword {
             if (firstCellKey === cellKey) {
               clues += aClue.toInputFormat()+'\n';
               numAcrossClues++;
-              // console.log('Added Across Clue#'+numAcrossClues+'  : '+aClue.toInputFormat());
+              
             }
           }
           var dClue = cell.downClue;
@@ -845,30 +805,24 @@ class Cword {
             if (firstCellKey === cellKey) {
               clues += dClue.toInputFormat()+'\n';
               numDownClues++;
-              // console.log('Added Down Clue#'+numDownClues+'  : '+dClue.toInputFormat());
+              
             }
           }
         }
       }
     }
-          
-    // console.log('# across clues = '+numAcrossClues);
   
     if (numAcrossClues === 0) {
       this.msgMgr.addWarn('validateClues : No across clues');
     }
-    // console.log('# down clues = '+numDownClues);
+    
     if (numDownClues === 0) {
       this.msgMgr.addWarn('validateClues : No down clues');
     }
-    // console.log('# total clues = '+(numAcrossClues+numDownClues));
-          
-    // console.log('InputFormat=' + clues);
   
     clues = clues.trim();
     var clueLines = clues.split('\n');
           
-    // console.log(clueLines.length+ ' clues');
     return clueLines;
     
   }
@@ -879,8 +833,7 @@ class Cword {
 
     var n = 0;
   
-    // Validate clues
-    // (Y,X,A/D,ClueId,Answer,Clue)
+    // Validate clues : (Y,X,A/D,ClueId,Answer,Clue)
          
     let clueMap = new Map();
 
@@ -888,15 +841,13 @@ class Cword {
       n = i+1;
       var cl = clueLines[i];
   
-      // console.log('#'+n+' : '+cl);
       var p = cl.split('|');
-      // console.log('#'+n+' : #parts='+p.length);
+
       if (p.length === 6) {
                   
         var y = p[0].trim();
         var yInt = 1 * y;
         if (yInt < 1) {
-          // console.log('Clue#'+n+' : invalid Y value. <1');
           this.msgMgr.addWarn('validateClues : Clue#'+n+' : invalid Y value. <1 : '+cl);
           continue;
         }
@@ -904,80 +855,71 @@ class Cword {
           this.msgMgr.addWarn('validateClues : Clue#'+n+' : invalid Y value : '+yInt+'. >max : '+cl);
           continue;
         }
-        // console.log('y='+yInt);
                   
         var x = p[1].trim();
         var xInt = 1 * x;
         if (xInt < 1) {
-          // console.log('Clue#'+n+' : invalid X value. <1');
+
           this.msgMgr.addWarn('validateClues : Clue#'+n+' : invalid X value. <1 : '+cl);
           continue;
         }
         if (xInt > this.getMaxAcross()) {
-          // console.log('Clue#'+n+' : invalid X value. >max');
+
           this.msgMgr.addWarn( 'validateClues : Clue#'+n+' : invalid X value : '+xInt+'. >max : '+cl);
           continue;
         }
-        // console.log('x='+xInt);
                 
         var d = p[2].trim();
         d = d.toUpperCase();
         var isAcross = true;
         if (d !== 'A' && d !== 'D') {
-          // console.log('Clue#'+n+' : invalid Direction value : '+d);
+
           this.msgMgr.addWarn('validateClues : Clue#'+n+' : invalid Direction value : '+d+' : '+cl);
           continue;
         }
         if (d === 'D') {
           isAcross = false;
         }
-        // console.log('isAcross='+isAcross);
                   
         let clueId = p[3].trim();
-        // console.log('clueId (info only)='+clueId);
   
         var answer = p[4].trim();
         answer = answer.toUpperCase();
         var answerLen = answer.length;
   
         if (answerLen <= 0) {
-          // console.log('Clue#'+n+' : answer length is zero');
+
           this.msgMgr.addWarn('validateClues : Clue#'+n+' : answer length is zero : '+cl);
           continue;
         }
         if (isAcross) {
           if (answerLen > this.getMaxAcross()) {
-            // console.log('Clue#'+n+' : across answer length too long : '+answerLen);
+
             this.msgMgr.addWarn('validateClues : Clue#'+n+' : across answer length too long : '+answerLen+ ' : '+cl);
             continue;
           } 
         } else {
           if (answerLen > this.getMaxDown()) {
-            // console.log('Clue#'+n+' : down answer length too long : '+answerLen);
+
             this.msgMgr.addWarn('validateClues : Clue#'+n+' : down answer length too long : '+answerLen+ ' : '+cl);
             continue;
           } 
         }
                   
-        // console.log('answer='+answer);
-                  
         var text = p[5].trim();
-        // console.log('text=['+text+']');
                                 
         var clueIdParts = clueId.split('.');
         var clueNum = 0;
         if (clueIdParts.length >= 2) {
            clueNum = 1 * clueIdParts[1];
         }
-        // OLD var clue = new Clue(xInt, yInt, isAcross, clueId, answer, text, clueNum);
+
         var clue = new Clue(yInt, xInt, isAcross, clueId, answer, text, clueNum);
         clue.answerLen = clue.answer.length;
 
-        // var key = xInt+'.'+yInt;
-        var key = Util.cellKey(yInt, xInt); // xInt+'.'+yInt;
+        var key = Util.cellKey(yInt, xInt); 
         var firstCell = this.cellMap.get(key);
         if (firstCell == null) {
-          // console.log('Clue#'+n+' : no firstcell for clue : '+clue.toInputFormat());
           this.msgMgr.addWarn('validateClues : Clue#'+n+' : no firstcell for clue : '+clue.toInputFormat()+' : '+cl);
           continue;
         }
@@ -987,16 +929,13 @@ class Cword {
         var uniqLoc = clue.uniqLocation();
   
         if (clueMap.has(uniqLoc)) {
-          // console.log('Clue#'+n+' uses unique location ('+uniqLoc+') already in use. ');
           this.msgMgr.addWarn('validateClues : Clue#'+n+' uses unique location ('+uniqLoc+') already in use. : '+cl);
           continue;
         } else {
           clueMap.set(uniqLoc, clue);
-          // console.log('#'+n+' success');
         }
           
       } else {
-        // console.log("Invalid clue line : ["+cl+"]");
         this.msgMgr.addWarn("validateClues : Invalid clue line : ["+cl+"]. Format : Y|X|A/D|ClueId|Answer|Clue");
       }
     }
@@ -1005,19 +944,18 @@ class Cword {
   }
 
   setupLabels() {
-    // console.log('Enter cword.setupLabels');
+
     // key = label value (number)   value = cell
     let labelMap = new Map();
 
     // setup labels
     let latestLabelNum = 0;
-    // var n = 0;
+
     for (var y=1; y<=this.getMaxDown(); y++) {
       for (var x=1; x<=this.getMaxAcross(); x++) {
-        // n++;
+
         var cellKey = Util.cellKey(y,x); 
 
-        // console.log('Cell#'+n+' : ... ====> .... row = '+y+' .... col = '+x);
         var c = this.cellMap.get(cellKey);
         if (c == null) {
           continue;
@@ -1028,13 +966,13 @@ class Cword {
                   
         var acrossClue = c.acrossClue;
         if (acrossClue != null) {
-          // console.log('.... AcrossClue : '+acrossClue.toInputFormat());
+
           var acrossPos = c.acrossPos;
           
           if (acrossPos === 0) {
 
             latestLabelNum++;
-            // console.log('............. AcrossClue : Its the first cell, try to assign next label number : '+latestLabelNum);
+
             let existCell = labelMap.get(latestLabelNum);
             if (existCell == null) {
               labelMap.set(latestLabelNum, c);
@@ -1044,32 +982,24 @@ class Cword {
             }
 
             c.label = latestLabelNum;
-            // console.log('............. Label via ACROSS clue ===> '+c.label);
+
             acrossClue.firstCell = c;
                           
-            // new for fr
+            // for fr
             c.acrossLabel = acrossClue.n;
-            // console.log('.... cell acrossLabel = '+c.acrossLabel);
-  
-            // console.log('.... clue firstCell = '+acrossClue.firstCell.toId());
-          } 
-          // else {
-          //   console.log('............. AcrossClue : Its NOT the first cell');
-          // }
+          }
         } 
   
         var downClue = c.downClue;
         if (downClue != null) {
-          // console.log('.... DownClue : '+downClue.toInputFormat());
                       
           var downPos = c.downPos;
           if (downPos === 0) {
            
             // only assign a new label if there is no label on the cell already
             if (c.label === 0) {
-              // console.log('............. DownClue : no label on cell');
               latestLabelNum++;
-              // console.log('............. DownClue : Its the first cell, try to assign next label number : '+latestLabelNum);
+
               let existCell = labelMap.get(latestLabelNum);
               if (existCell == null) {
                 labelMap.set(latestLabelNum, c);
@@ -1079,14 +1009,14 @@ class Cword {
               }
 
               c.label = latestLabelNum;
-              // console.log('............. Label via DOWN clue ===> '+c.label);
+
             } else {
               // there is a label in the cell already - check that its the first cell of the across clue
-              // console.log('............. DownClue : label exists on cell : '+c.label);
+
               if (acrossPos === 0) {
-                // console.log('............. DownClue : is the first cell of across clue, so will use SAME label');
+                
                 c.label = latestLabelNum;
-                // console.log('............. Label via DOWN (re-use ACROSS) clue ===> '+c.label);
+                
               } else {
                 console.log('ERROR ..... DownClue : Label '+c.label+' cannot be used by cell: '+c.getKey()+' since not first Cell of across clue');
                 throw new Error('DownClue : Label '+c.label+' cannot be used by cell: '+c.getKey()+' since not first Cell of across clue');
@@ -1095,20 +1025,16 @@ class Cword {
                         
             downClue.firstCell = c;
                         
-            // new for fr
+            // for fr
             c.downLabel = downClue.n;
-            // console.log('.... cell downLabel = '+c.downLabel);
-  
-            // console.log('.... clue firstCell = '+downClue.firstCell.toId());
+
                         
           } 
-          // else {
-          //  console.log('............. DownClue : Its NOT the first cell');
-          // }
+
         }
       }
     }
-    // console.log('Exit cword.setupLabels');
+    
   }
 
   setupData() {
@@ -1378,7 +1304,7 @@ class Cword {
     for (var y=1; y<=maxDown; y++) {
       var row = '  '+Util.formatNum(y)+ ' | ';
       for (var x=1; x<=maxAcross; x++) {
-        var cellKey = Util.cellKey(y,x); // x+"."+y;
+        var cellKey = Util.cellKey(y,x); 
         var c = this.cellMap.get(cellKey);
         if (c == null) {
           row += '   .';
@@ -1388,14 +1314,14 @@ class Cword {
           if (this.hasCellAdjacentAcross(c, 1) || this.hasCellAdjacentAcross(c, -1)) {
             acrossClue = c.acrossClue;
             if (acrossClue == null) {
-              // console.log('Cell at '+cellKey+ ' has no across clue and should have one');
+              
               this.msgMgr.addWarn('printCells : Cell at ( row : '+y+' ; column : '+x+' ) no across clue and should have one');
             }
           }
           if (this.hasCellAdjacentDown(c, 1) || this.hasCellAdjacentDown(c, -1)) {
             downClue = c.downClue;
             if (downClue == null) {
-              // console.log('Cell at '+cellKey+ ' has no down clue and should have one');
+             
               this.msgMgr.addWarn('printCells : Cell at ( row : '+y+' ; column : '+x+' ) no down clue and should have one');
             }
           }
@@ -1411,7 +1337,7 @@ class Cword {
               var downValue = c.downValue;
               row += '   '+Util.formatNum(downValue);
             } else {
-              // console.log('Cell at '+cellKey+ ' has no across/down clue');
+              
               this.msgMgr.addWarn('printCells : Cell at ( row : '+y+' ; column : '+x+' ) has no across or down clue');
             }
           }
@@ -1434,7 +1360,7 @@ class Cword {
     for (var y=1; y<=maxDown; y++) {
       var row = '  '+Util.formatNum(y)+ ' | ';
       for (var x=1; x<=maxAcross; x++) {
-        var cellKey = Util.cellKey(y,x); // x+"."+y;
+        var cellKey = Util.cellKey(y,x); 
         var c = this.cellMap.get(cellKey);
         if (c == null) {
           row += '   .';
@@ -1464,7 +1390,7 @@ class Cword {
     for (var y=1; y<=maxDown; y++) {
       var row = '  '+Util.formatNum(y)+ ' | ';
       for (var x=1; x<=maxAcross; x++) {
-        var cellKey = Util.cellKey(y,x); // x+"."+y;
+        var cellKey = Util.cellKey(y,x); 
         var c = this.cellMap.get(cellKey);
         if (c == null) {
           row += '   .';
@@ -1495,7 +1421,7 @@ class Cword {
     for (var y=1; y<=maxDown; y++) {
       var row = '  '+Util.formatNum(y)+ ' | ';
       for (var x=1; x<=maxAcross; x++) {
-        var cellKey = Util.cellKey(y,x); // x+"."+y;
+        var cellKey = Util.cellKey(y,x); 
         var c = this.cellMap.get(cellKey);
         if (c == null) {
           row += '   .';
@@ -1520,7 +1446,7 @@ class Cword {
       var clue = list1[i];
       var firstCell = clue.firstCell;
       if (firstCell == null) {
-        // console.log('Across clue has no first cell : '+clue.toInputFormat());
+        
         this.msgMgr.addWarn('printAcrossClues : Across clue has no first cell : '+clue.toInputFormat());
         continue;
       }
@@ -1544,7 +1470,7 @@ class Cword {
       var clue = list1[i];
       var firstCell = clue.firstCell;
       if (firstCell == null) {
-        // console.log('Down clue has no first cell : '+clue.toInputFormat());
+        
         this.msgMgr.addWarn('printDownClues : Down clue has no first cell : '+clue.toInputFormat());
         continue;
       }
@@ -1565,7 +1491,7 @@ class Cword {
     var x = cell.x;
     var y = cell.y;
     var newX = x + n;
-    var newKey = Util.cellKey(y, newX); // newX+'.'+y;            
+    var newKey = Util.cellKey(y, newX);           
     var cell2 = this.cellMap.get(newKey);
     if (cell2 != null) {
       return true;
@@ -1577,7 +1503,7 @@ class Cword {
     var x = cell.x;
     var y = cell.y;
     var newY = y + n;
-    var newKey = Util.cellKey(newY, x); // x+'.'+newY;         
+    var newKey = Util.cellKey(newY, x);   
     var cell2 = this.cellMap.get(newKey);
     if (cell2 != null) {
       return true;
@@ -1591,7 +1517,7 @@ class Cword {
     var list = [];
     for (var y=1; y<=maxDown; y++) {
       for (var x=1; x<=maxAcross; x++) {
-        var cellKey = Util.cellKey(y,x); // x+'.'+y;
+        var cellKey = Util.cellKey(y,x); 
         var cell = this.cellMap.get(cellKey);
         if (cell != null) {
           if (cell.label > 0) {
@@ -1649,7 +1575,7 @@ class Cword {
     let acrossSel = this.isSelectedClue(acrossClue);
 
     let downClue = cell.downClue
-    // let downSel = this.isSelectedClue(downClue);
+    
 
     // switch direction if possible
     if (acrossClue != null) {
@@ -1666,12 +1592,6 @@ class Cword {
       this.selectedClue = downClue;
     }
 
-    if (this.selectedClue != null) {
-      console.log('Clicked : selectedClue : '+this.selectedClue.uniqLocation());
-    } else {
-      console.log('Clicked : selectedClue : null');
-    }
-
     this.makeCurrentCell(cell);
 
   }
@@ -1679,7 +1599,7 @@ class Cword {
   makeCurrentCell(cell) {
 
     if (cell == null) {
-      console.log("Logic error : cannot set current cell to null");
+      console.log("ERROR : cannot set current cell to null");
     }
 
     this.selectedCell = cell;
@@ -1711,10 +1631,10 @@ class Cword {
           // same clue
           if (cellKey === cellKey2) {
             cell2.bgColor = Util.COLOR_ORANGE;
-            console.log('Across: set BG Orange for cell : '+cellKey2);
+           
           } else {
             cell2.bgColor = Util.COLOR_YELLOW;
-            console.log('Across: set BG Yellow for cell : '+cellKey2);
+            
           }
         } else {
           cell2.bgColor = Util.COLOR_NONE;
@@ -1740,42 +1660,13 @@ class Cword {
           // same down clue
           if (cellKey === cellKey2) {
             cell2.bgColor = Util.COLOR_ORANGE;
-            console.log('Down: set BG Orange for cell : '+cellKey2);
+            
           } else {
             cell2.bgColor = Util.COLOR_YELLOW;
-            console.log('Down: set BG Yellow for cell : '+cellKey2);
+            
           }
         } else {
           cell2.bgColor = Util.COLOR_NONE;
-        }
-      }
-    }
-  }
-
-  // debug only
-  showColors() {
-    let maxAcross = this.getMaxAcross();
-    let maxDown = this.getMaxAcross();
-    for (var y=1; y<=maxDown; y++) {
-      for (var x=1; x<=maxAcross; x++) {
-        var cellKey = Util.cellKey(y,x); 
-        var cell = this.cellMap.get(cellKey);
-        if (cell == null) {
-          continue;
-        }
-        var bgColor = cell.bgColor;
-        if (bgColor != null) {
-          if (bgColor === Util.COLOR_ORANGE) {
-            console.log('BG Orange : '+cellKey);
-          } else if (bgColor === Util.COLOR_YELLOW) {
-            console.log('BG Yellow : '+cellKey);
-          } else if (bgColor === Util.COLOR_NONE) {
-            console.log('BG None : '+cellKey);
-          } else {
-            console.log('BG ...'+bgColor+'... : '+cellKey);
-          }
-        } else {
-          console.log('BG null : '+cellKey);
         }
       }
     }
@@ -1786,9 +1677,9 @@ class Cword {
     var id = elem.id;
     var keyev = ev.key;
     var key = ev.keyCode;
-    // var charcode = ev.charCode;
+
     let cellKey = Util.cellKeyFromCellId(id);
-    console.log('KeyUp : '+id+'...'+cellKey+'...'+keyev+'...'+key);
+    
     let cell = this.cellMap.get(cellKey);
     let initialValue = cell.value;
 
@@ -1815,13 +1706,9 @@ class Cword {
       this.letterUp(cell, 1);
       if (cell.value !== initialValue) {
         changedValue = cell.value;
-        console.log('KeyUp : '+id+'...'+cellKey+'...changedValue : ...['+changedValue+']');
+        
       }
-    } else {
-
-      // ev.preventDefault();
-      // return false;
-    }
+    } 
     return changedValue;
   }
 
@@ -1883,19 +1770,8 @@ class Cword {
       }
     }
 
-    console.log('letterUp : ... acrossSel : '+acrossSel+'... newId : '+newId);
-
     let newCellKey = Util.cellKeyFromCellId(newId);
     let newCell = this.cellMap.get(newCellKey);
-
-    // let newClue = null; 
-     
-    // if (acrossSel) { 
-    //   newClue = newCell.acrossClue;
-    // } else {
-    //   newClue = newCell.downClue;
-    // }
-    // this.selectedClue = newClue;   
 
     this.makeCurrentClue(newCell, acrossSel);
 
@@ -1944,20 +1820,16 @@ class Cword {
         newLocation = cell.prevDownLocation;
       }
     }
-    console.log('tabUp : ... acrossSel : '+acrossSel+'... newLocation : '+newLocation);
 
     let newClue = this.clueMap.get(newLocation);
     this.selectedClue = newClue;    
 
     let newCell = this.selectedClue.firstCell;
 
-    console.log('tabUp : ... newCell : '+newCell.toId()+'... key : '+newCell.getKey());
-
     this.makeCurrentCell(newCell);
   }
 
   arrowUp(cell, newId) {
-    console.log('arrowUp : new id is : '+newId);
 
     let newCellKey = Util.cellKeyFromCellId(newId);
     let newCell = this.cellMap.get(newCellKey);
@@ -1965,39 +1837,12 @@ class Cword {
     let acrossClue = cell.acrossClue;
     let acrossSel = this.isSelectedClue(acrossClue);
 
-    // let downClue = cell.downClue
-    // let downSel = this.isSelectedClue(downClue);
-
     this.makeCurrentClue(newCell, acrossSel);
-
-    // if (acrossClue != null) {
-    //   if (downClue != null) {
-    //     if (acrossSel) {
-    //       this.selectedClue = newCell.downClue;
-    //     } else {
-    //       this.selectedClue = newCell.acrossClue;
-    //     }
-    //   } else {
-    //     this.selectedClue = newCell.acrossClue;
-    //   }
-    // } else {
-    //   this.selectedClue = newCell.downClue;
-    // }
-
-    console.log('arrowUp : selectedClue : '+this.selectedClue.uniqLocation());
 
     this.makeCurrentCell(newCell);
   }
 
   keyDownPlayCell(ev) {
-    var elem = ev.currentTarget;
-
-    var id = elem.id;
-    var keyev = ev.key;
-    var key = ev.keyCode;
-    // var charcode = ev.charCode;
-    let cellKey = Util.cellKeyFromCellId(id);
-    console.log('KeyDown : '+id+'...'+cellKey+'...'+keyev+'...'+key);
 
     ev.preventDefault();
     
@@ -2006,7 +1851,6 @@ class Cword {
   }
 
   acrossClueClicked(id) {
-    console.log('acrossClueClicked : '+id);
 
     let clue = this.clueMap.get(id);
     this.selectedClue = clue;
@@ -2016,7 +1860,6 @@ class Cword {
   }
 
   downClueClicked(id) {
-    console.log('downClueClicked : '+id);
 
     let clue = this.clueMap.get(id);
     this.selectedClue = clue;
@@ -2029,7 +1872,6 @@ class Cword {
     let num = this.getMaxAcross();
     let clues = this.horizClues;
     const lines = this.getLines(num, clues, 'down');
-    console.log('Setup '+lines.length+' lines');
     if (lines == null || lines.length === 0) {
       return clues;
     }
@@ -2041,7 +1883,6 @@ class Cword {
     let num = this.getMaxDown();
     let clues = this.vertClues;
     const lines = this.getLines(num, clues, 'across');
-    console.log('Setup '+lines.length+' lines');
     if (lines == null || lines.length === 0) {
       return clues;
     }

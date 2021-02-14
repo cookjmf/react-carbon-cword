@@ -1,7 +1,6 @@
 // ---- variables ----
 
 // Action
-// export const ACTION_TITLE = '--Choose action--';
 export const ACTION_CREATE = 'create';
 export const ACTION_CREATE_EXAMPLE = 'createExample';
 export const ACTION_UPDATE = 'update';
@@ -13,12 +12,10 @@ export const ACTION_DELETE = 'delete';
 
 // Name
 export const NAME_TITLE = '--Choose crossword--';
-// export const NAME_PLACEHOLDER = '--Enter name--';
 export const NAME_MIN_LEN = 3;
 export const NAME_MAX_LEN = 80;
 
 // Size
-// export const SIZE_TITLE = '--Choose size--';
 export const SIZES_ALLOWED = [ '7', '15', '20' ];
 
 // Examples
@@ -163,9 +160,9 @@ export const CONFIRM_IMPORT = 'cw-confirm-import';
 
 export const ERROR_INVALID_IMPORT_JSON = 'cw-error-invalid-import-json';
 
-export const TA_ACROSS_CLUES = 'ta-clues-across';
-export const TA_DOWN_CLUES = 'ta-clues-down';
-export const TA_IMPORT = 'ta-import';
+export const TEXTAREA_ACROSS_CLUES = 'textarea-clues-across';
+export const TEXTAREA_DOWN_CLUES = 'textarea-clues-down';
+export const TEXTAREA_IMPORT = 'textarea-import';
 
 // ---- functions ----
 

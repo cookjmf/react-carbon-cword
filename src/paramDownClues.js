@@ -11,11 +11,10 @@ const ParamDownClues = (props) => {
   let textarea = createRef();
 
   useEffect(() => {
-    // console.log('ParamDownClues : useEffect : enter');
     let elem = textarea.current;   
     if (elem != null) {
       let cword = props.cword;
-      if (cword.paramTextareaSelected === Util.TA_DOWN_CLUES) { 
+      if (cword.paramTextareaSelected === Util.TEXTAREA_DOWN_CLUES) { 
         elem.selectionStart = cword.paramDownCluesStart;
         elem.selectionEnd = cword.paramDownCluesEnd;
         elem.focus();

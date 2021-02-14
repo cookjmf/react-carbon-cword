@@ -27,7 +27,7 @@ class Clue {
   }
 
   getFirstCellKey() {
-    return Util.cellKey(this.y,this.x); // x+'.'+clue.y;
+    return Util.cellKey(this.y,this.x);
   }
 
   toInputFormat() {
@@ -50,7 +50,6 @@ class Clue {
   }
 
   uniqLocation() {
-    // return this.y+'.'+this.x+'.'+Util.direction(this.isAcross);
     return Util.uniqLocation(this.y,this.x,this.isAcross);
   }
 
