@@ -20,7 +20,7 @@ const PlayBoard = (props) => {
     <>
     { boardArray.map( 
       (boardArrayKey, index) => { 
-        // console.log("create playCell for boardArrayKey : ..."+boardArrayKey+"... index : "+index);
+       
         return(
           <PlayCell 
             key={boardArrayKey}

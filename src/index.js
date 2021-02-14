@@ -8,8 +8,6 @@ console.log('index : START : -------------------------------------------->');
 console.log('index : START : ReactDOM.render Game ----------------------->');
 console.log('index : START : -------------------------------------------->');
 
-
-//  <Game />,
 ReactDOM.render(
   <Game />,
   document.getElementById('root')

@@ -94,13 +94,13 @@ const PlayCell = (props) => {
       let yVal = y-1; 
       let cellKey = Util.cellKey(yVal,xVal);
       id = Util.toCellId(yVal, xVal);
-      // let val = '';
+      
       let isBlank = true;
       let cell = null;
       if (cellMap.has(cellKey)) {
         isBlank = false;
         cell = cellMap.get(cellKey);
-        // val = cell.value;
+        
       }
       if (isBlank) {
         return renderBlankCell(id);
@@ -119,7 +119,7 @@ const PlayCell = (props) => {
   if (boardArrayKey == null) {
     return <p>E101</p>
   } else {
-    // console.log('ParamCell : render : boardArrayKey : '+boardArrayKey);
+    
 
     let onClick= props.onClick;
     let onChange = props.onChange;

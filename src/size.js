@@ -8,8 +8,6 @@ const Size = (props) => {
 
   console.log('Size : enter');
 
-  console.log('Size : props : '+JSON.stringify(props));
-
   let selectedSize = props.selected;
   
   if (selectedSize == null || selectedSize.length === 0) {

@@ -103,8 +103,6 @@ const Play = (props) => {
     </div>
   );
 
-  
-
 }
 
 export default Play;
