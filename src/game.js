@@ -10,50 +10,9 @@ import MsgMgr from './msgMgr';
 
 import * as Util from './util';
 
-// class Game extends React.Component {
-//   constructor(props) {   
-//     super(props);
-//     console.log('Game : constructor : enter');
+const Game = React.memo((props) => {
 
-//     // enables a child to call onChangeXXXX with the selected value
-
-//     // init
-//     onChangeAction = onChangeAction.bind(this);
-//     onChangeName = onChangeName.bind(this);
-//     onChangeNewName = onChangeNewName.bind(this);
-//     onChangeSize = onChangeSize.bind(this);
-//     // message
-//     onClickMessageClose = onClickMessageClose.bind(this);
-//     onClickMessageConfirm = onClickMessageConfirm.bind(this);
-//     // param
-//     onClickParamCell = onClickParamCell.bind(this);
-//     onKeyUpParamAcrossTextarea = onKeyUpParamAcrossTextarea.bind(this);
-//     onKeyUpParamDownTextarea = onKeyUpParamDownTextarea.bind(this);
-//     onKeyUpImportTextarea = onKeyUpImportTextarea.bind(this);
-//     // play
-//     onClickPlayCell = onClickPlayCell.bind(this);
-//     onChangePlayCell = onChangePlayCell.bind(this); // TODO : share with on key up
-//     onKeyUpPlayCell = onKeyUpPlayCell.bind(this);
-//     onKeyDownPlayCell = onKeyDownPlayCell.bind(this);
-//     onClickAcrossClue = onClickAcrossClue.bind(this);
-//     onClickDownClue = onClickDownClue.bind(this);
-    
-//     // message manager
-//     msgMgr = new MsgMgr();
-
-//     // state
-//     state = {
-//       updateTimestamp: '',
-//       existingNames: null,
-//       action: '',
-//       msg: null,
-//       cword: null,
-//     };
-//   }
-
-// const Game = React.memo((props, changedForRender) => {
-const Game = () => {
-
+  console.log('Initial value : props = '+JSON.stringify(props));
   let msgMgr = new MsgMgr();
 
   const [updateTimestamp, setUpdateTimestamp] = useState('');
@@ -61,7 +20,6 @@ const Game = () => {
   const [action, setAction] = useState('');
   const [msg, setMsg] = useState(null);
   const [cword, setCword] = useState(null);
-
   const [selectedAction, setSelectedAction] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
 
@@ -70,36 +28,13 @@ const Game = () => {
   console.log('Initial value : selectedAction = '+selectedAction);
   console.log('Initial value : selectedSize = '+selectedSize);
 
-   // TODO : replace class component lifecycle methods below 
-
-  // DONE componentDidMount() {
-  //   console.log('Game : componentDidMount : enter');
-  //   storeGetNames();
-  // }
-
-  // componentDidUpdate() {
-  //   // console.log('Game : componentDidUpdate : enter');
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('Game : shouldComponentUpdate : enter');
-  //   let res = false;
-  //   console.log('Game : shouldComponentUpdate : updateTimestamp : ...'+updateTimestamp+'...');
-  //   console.log('Game : shouldComponentUpdate : nextupdateTimestamp : ....'+nextupdateTimestamp+'...');
-  //   if (updateTimestamp !== nextupdateTimestamp) {
-  //     res = true;
-  //     console.log('Game : shouldComponentUpdate : new value for updateTimestamp so will render');
-  //   } else {
-  //     console.log('Game : shouldComponentUpdate : SAME value for updateTimestamp so will NOT render');
-  //   }
-  //   return res;
-  // }
-
-
-
+  // Note: replacement for componentDidMount()
+  // Note: the empty array prevents endless loop
+  // Note: the eslint comment prevents warning about : React Hook useEffect has a missing dependency:
   useEffect(() => {
     storeGetNames();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // on methods
   // CAN CHANGE STATE
@@ -117,9 +52,6 @@ const Game = () => {
     console.log('Game : START : onChangeAction ----> value : '+newActionValue+' --------->');
     console.log('Game : START : -------------------------------------------->');
 
-
-    // let existingNames = state.existingNames;
-
     if (newAction === Util.ACTION_CREATE_EXAMPLE) {
       let names = [];
 
@@ -134,11 +66,6 @@ const Game = () => {
       setExistingNames(names);
       setUpdateTimestamp(Util.newDate() );
 
-      // setState({ action: newAction, cword: null,
-      //   existingNames: names, 
-      //   updateTimestamp: Util.newDate() }); 
-
-
     } else if (newAction === Util.ACTION_CLEAR) {
 
       storeGetNames();
@@ -152,9 +79,6 @@ const Game = () => {
       setMsg(null);
       setUpdateTimestamp(Util.newDate() );
 
-      // setState({ action: newAction, cword: cword, msg: null,
-      //   updateTimestamp: Util.newDate() }); 
-
     } else {
 
       setAction(newAction);
@@ -162,8 +86,6 @@ const Game = () => {
       setMsg(null);
       setUpdateTimestamp(Util.newDate() );
 
-      // setState({ action: newAction, cword: null, msg: null,
-      //   updateTimestamp: Util.newDate() }); 
     }   
   }
 
@@ -180,7 +102,6 @@ const Game = () => {
     console.log('Game : START : onChangeName ----> value : '+newNameValue+' --------->');
     console.log('Game : START : -------------------------------------------->');
      
-    // let action = state.action;
     if (action === Util.ACTION_DELETE) {
       let cword = new Cword();
       cword.name = newName;
@@ -223,7 +144,6 @@ const Game = () => {
     console.log('Game : START : onChangeNewName ----> value : '+newName+' --------->');
     console.log('Game : START : -------------------------------------------->');
 
-   //  let action = state.action;
     if (action === Util.ACTION_CREATE) {
 
       let cword = new Cword();
@@ -231,18 +151,12 @@ const Game = () => {
 
       setCword(cword);
 
-      // setState({ cword: cword }); 
-
       if (Util.isExample(newName)) {
 
         msgMgr.addError('Invalid name, reserved for example');
 
         setMsg(msgMgr.msg());
         setUpdateTimestamp(Util.newDate() );
-
-        // setState({ 
-        //   msg : msgMgr.msg() , updateTimestamp: Util.newDate()
-        // });
 
       } 
     } else {
@@ -263,25 +177,17 @@ const Game = () => {
     console.log('Game : START : onChangeSize ----> value : '+newSizeValue+' --------->');
     console.log('Game : START : -------------------------------------------->');
 
-    // let cword = state.cword;
     cword.init(newSize);
 
-    // let action = state.action;
     if (action === Util.ACTION_CREATE) {
 
       let name = cword.name;
-
-      // let existingNames = state.existingNames;
       
       if (!Util.isValidName(name)) {
         msgMgr.addError('Invalid name : '+name);
 
         setMsg(msgMgr.msg());
         setUpdateTimestamp(Util.newDate() );
-
-        // setState({ 
-        //   msg : msgMgr.msg() , updateTimestamp: Util.newDate()
-        // });
   
       } else if (Util.isDuplicateName(existingNames, name)) {
         msgMgr.addError('Duplicate name : '+name);
@@ -289,9 +195,6 @@ const Game = () => {
         setMsg(msgMgr.msg());
         setUpdateTimestamp(Util.newDate() );
 
-        // setState({ 
-        //   msg : msgMgr.msg() , updateTimestamp: Util.newDate()
-        // });
       } else {
   
         let cwObj = Util.EXAMPLE_MAP.get(name);
@@ -305,7 +208,6 @@ const Game = () => {
         }
       }
     
-
     } else {
       console.log("logic error : in onChangeSize but action is not CREATE");
     }
@@ -318,15 +220,11 @@ const Game = () => {
 
     msgMgr.clear(); 
 
-    // let cword = state.cword;
     let name = '';
     if (cword != null) {
       name = cword.name;
     }
-    // let action = state.action;
-    // let existingNames = state.existingNames;
 
-    //  selectedSize: Util.SIZE_TITLE, 
     if (action === Util.ACTION_CREATE) {
       if (!Util.isValidName(name) || Util.isDuplicateName(existingNames, name)) {
         // force user to choose "Size" again
@@ -336,12 +234,6 @@ const Game = () => {
         setMsg(null);
         setUpdateTimestamp(Util.newDate() );
 
-        // setState( { 
-        //   selectedAction: Util.ACTION_CREATE, 
-        //   selectedSize: '',       
-        //   msg: null, 
-        //   updateTimestamp: Util.newDate() } 
-        //   );  
       } else {
         storeGetNames();
       }
@@ -352,7 +244,7 @@ const Game = () => {
     } else if (action === Util.ACTION_EXPORT) {
       storeGetNames();
     } else if (action === Util.ACTION_IMPORT) {
-      // let msg = state.msg;
+
       if (msg != null && msg.errorId === Util.ERROR_INVALID_IMPORT_JSON) {
         // invalid json for import so enable user to update it
 
@@ -360,18 +252,11 @@ const Game = () => {
         setMsg(null);
         setUpdateTimestamp(Util.newDate() );
 
-        // setState( { 
-        //   selectedAction: Util.ACTION_IMPORT, 
-        //   msg: null, 
-        //   updateTimestamp: Util.newDate() } 
-        //   ); 
       } else {
 
         setAction(null);
         setCword(null);
-        setMsg(null);
-
-        // setState({ msg: null, action: null, cword: null });       
+        setMsg(null);   
 
         storeGetNames();
       }
@@ -382,8 +267,6 @@ const Game = () => {
       setMsg(null);
       setUpdateTimestamp(Util.newDate() );
 
-      // setState({ msg: null,
-      //   updateTimestamp: Util.newDate() }); 
     }
   }
 
@@ -393,20 +276,14 @@ const Game = () => {
     console.log('Game : START : -------------------------------------------->');  
 
     if (id === Util.CONFIRM_VALIDATE) {
-      // let cword = state.cword;
+
       let newMsg = cword.validate();
 
       setMsg(newMsg);
       setUpdateTimestamp(Util.newDate() );
 
-      // setState( { 
-      //   msg: msg, 
-      //   updateTimestamp: Util.newDate() 
-      // });
 
     } else if (id === Util.CONFIRM_IMPORT) {
-
-      // let cword = state.cword;
 
       try {
         let value = cword.importJson;
@@ -435,11 +312,7 @@ const Game = () => {
 
           setMsg(newMsg);
           setUpdateTimestamp(Util.newDate() );
-    
-          // setState( { 
-          //   msg: msg, 
-          //   updateTimestamp: Util.newDate() 
-          // });
+    ;
         }
 
       } catch (err) {
@@ -448,11 +321,6 @@ const Game = () => {
         setMsg(msgMgr.msg());
         setUpdateTimestamp(Util.newDate() );
 
-        
-        // setState( { 
-        //   msg: msgMgr.msg(), 
-        //   updateTimestamp: Util.newDate() 
-        // });
       }
     }
   }
@@ -463,7 +331,6 @@ const Game = () => {
     console.log('Game : START : onClickParamCell ----> '+id+'------------->');
     console.log('Game : START : -------------------------------------------->');  
 
-    // let cword = state.cword;
     cword.toggleParamCell(id);
 
     storeSave(cword);
@@ -487,16 +354,10 @@ const Game = () => {
       let atext = Util.convertCluesRomanDash(value);
       atext = Util.convertCluesDash(atext);
 
-      // let cword = state.cword;
       cword.horizClues = atext;
       cword.paramTextareaSelected = Util.TA_ACROSS_CLUES;
       cword.paramAcrossCluesStart = elem.selectionStart;
       cword.paramAcrossCluesEnd = elem.selectionEnd;
-
-      console.log('horizClues = '+cword.horizClues);
-      console.log('paramTextareaSelected = '+cword.paramTextareaSelected);
-      console.log('paramAcrossCluesStart = '+cword.paramAcrossCluesStart);
-      console.log('paramAcrossCluesEnd = '+cword.paramAcrossCluesEnd);
 
       storeSave(cword);
 
@@ -524,7 +385,6 @@ const Game = () => {
       let dtext = Util.convertCluesRomanDash(value);
       dtext = Util.convertCluesDash(dtext);
 
-      // let cword = state.cword;
       cword.vertClues = dtext;
 
       cword.paramTextareaSelected = Util.TA_DOWN_CLUES;
@@ -548,11 +408,9 @@ const Game = () => {
     console.log('Game : START : onClickPlayCell ----> id: '+id+' ------------->');
     console.log('Game : START : -------------------------------------------->');  
 
-    // let cword = state.cword;
     let newMsg = cword.buildForPlay();
 
     if (newMsg != null) {
-
 
     } else {
       cword.cellClicked(id);
@@ -561,9 +419,6 @@ const Game = () => {
       setCword(cword);
       setUpdateTimestamp(Util.newDate() );
 
-
-      // setState({ msg: null, cword: cword,
-      //   updateTimestamp: Util.newDate() }); 
     }
   }
 
@@ -591,7 +446,6 @@ const Game = () => {
     console.log('Game : START : onKeyUpPlayCell ----> id : '+id+' ------------->');
     console.log('Game : START : -------------------------------------------->');   
 
-    // let cword = state.cword;
     let value = cword.keyUpPlayCell(ev);
 
     if (value != null) {
@@ -605,8 +459,6 @@ const Game = () => {
       setCword(cword);
       setUpdateTimestamp(Util.newDate() );
 
-      // setState({ msg: null, cword: cword,
-      //   updateTimestamp: Util.newDate() }); 
     }
 
   }
@@ -620,17 +472,11 @@ const Game = () => {
     console.log('Game : START : onKeyDownPlayCell ----> id : '+id+' ------------->');
     console.log('Game : START : -------------------------------------------->');  
 
-    // let cword = state.cword;
     let result = cword.keyDownPlayCell(ev);
-
 
     setMsg(null);
     setCword(cword);
     setUpdateTimestamp(Util.newDate() );
-
-
-    // setState({ msg: null, cword: cword,
-    //   updateTimestamp: Util.newDate() }); 
 
     return result;
   }
@@ -641,16 +487,11 @@ const Game = () => {
     console.log('Game : START : onClickAcrossClue ----> '+id+'------------->');
     console.log('Game : START : -------------------------------------------->');  
 
-    // let cword = state.cword;
     cword.acrossClueClicked(id);
 
     setMsg(null);
     setCword(cword);
     setUpdateTimestamp(Util.newDate() );
-
-
-    // setState({ msg: null, cword: cword,
-    //   updateTimestamp: Util.newDate() }); 
 
   }
 
@@ -660,15 +501,12 @@ const Game = () => {
     console.log('Game : START : onClickDownClue ----> '+id+'------------->');
     console.log('Game : START : -------------------------------------------->');  
 
-    // let cword = state.cword;
     cword.downClueClicked(id);
 
     setMsg(null);
     setCword(cword);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState({ msg: null, cword: cword,
-    //   updateTimestamp: Util.newDate() }); 
   }
 
   const onKeyUpImportTextarea = (ev) => {
@@ -686,26 +524,17 @@ const Game = () => {
 
     if (type === 'change') {
 
-      // let cword = state.cword;
       cword.importJson = value;
 
       cword.paramTextareaSelected = Util.TA_IMPORT;
       cword.paramImportStart = elem.selectionStart;
       cword.paramImportEnd = elem.selectionEnd;
 
-      console.log('importJson = '+cword.importJson);
-      console.log('paramTextareaSelected = '+cword.paramTextareaSelected);
-      console.log('paramImportStart = '+cword.paramImportStart);
-      console.log('paramImportEnd = '+cword.paramImportEnd);
-
       msgMgr.addConfirmInfo('', 'Import', Util.CONFIRM_IMPORT);
 
       setMsg(msgMgr.msg());
       setCword(cword);
       setUpdateTimestamp(Util.newDate() );
-
-      // setState({ msg: msgMgr.msg(), cword: cword,
-      //   updateTimestamp: Util.newDate() }); 
 
     } else {
       console.log('ignore since not a change');
@@ -784,8 +613,6 @@ const Game = () => {
   
     // for play and update - assume the cword exists
     // for other cases, (new, new-example, import) check first
-
-    // let action = state.action;
 
     if (action === Util.ACTION_PLAY || action === Util.ACTION_UPDATE) {
       storeUpdate(cwObj);
@@ -977,11 +804,6 @@ const Game = () => {
       setMsg(newMsg);
       setUpdateTimestamp(Util.newDate() );
 
-
-      // setState( { existingNames: names, 
-      //   cword: null, action: '', 
-      //   msg: msg , updateTimestamp: Util.newDate()} );
-
     } else {
 
       setAction('');
@@ -990,9 +812,6 @@ const Game = () => {
       setMsg(null);
       setUpdateTimestamp(Util.newDate() );
 
-      // setState( { existingNames: names, 
-      //   cword: null, action: '', 
-      //   msg: null , updateTimestamp: Util.newDate()} );
     }
 
   }
@@ -1053,10 +872,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-
-    // setState( {
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultCreateUpdate = (cwObj, ok, err) => {
@@ -1074,9 +889,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultCreateImport = (cwObj, ok, err) => {
@@ -1096,9 +908,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {existingNames: existingNames,
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultUpdateImport = (cwObj, ok, err) => {
@@ -1115,9 +924,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultUpdateUpdate = (cwObj, ok, err) => {
@@ -1134,9 +940,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultCreateInsert = (cwObj, ok, err) => {
@@ -1157,9 +960,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {existingNames: existingNames,
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultCreateInsertExample = (cwObj, ok, err) => {
@@ -1181,9 +981,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {existingNames: existingNames,
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultCreateSave = (cwObj, ok, err) => {
@@ -1202,10 +999,6 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-
-    // setState( {
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultUpdateSave = (cwObj, ok, err) => {
@@ -1224,15 +1017,10 @@ const Game = () => {
     setMsg(newMsg);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {
-    //   msg: msg , cword: cwObj, updateTimestamp: Util.newDate()
-    // } );
   }
 
   const resultGet = (cwObj, ok, name, err) => {
     console.log('Game : resultGet : enter');
-
-    // let action = state.action;
 
     if (!ok) {
       msgMgr.addError('Failed to get crossword : '+name+'. '+err);
@@ -1240,10 +1028,6 @@ const Game = () => {
 
       setMsg(newMsg);
       setUpdateTimestamp(Util.newDate() );
-
-      // setState( {
-      //   msg: msg , updateTimestamp: Util.newDate()
-      // } );
 
     } else {
       let cword = new Cword();
@@ -1262,11 +1046,6 @@ const Game = () => {
       setMsg(newMsg);
       setCword(cword);
       setUpdateTimestamp(Util.newDate() );
-
-      // setState( { 
-      //   msg: msg,
-      //   cword: cword,
-      //   updateTimestamp: Util.newDate()} );
   
     }
   }
@@ -1285,7 +1064,6 @@ const Game = () => {
     setCword(cword);
     setUpdateTimestamp(Util.newDate() );
 
-    // setState( {msg : msg, cword: cword, updateTimestamp: Util.newDate()} );
   }
 
   // render methods
@@ -1294,8 +1072,7 @@ const Game = () => {
   const renderCreate = () => {
     // chose create, show name, size
     console.log('Game : renderCreate : enter');
-    // console.log('Game : renderCreate : state : '+JSON.stringify(state));
-    // selectedSize={ Util.SIZE_TITLE }
+
     return (
       <div className="game">   
         <Init 
@@ -1320,7 +1097,7 @@ const Game = () => {
   const renderCreateExample = () => {
     // chose create, show name
     console.log('Game : renderCreateExample : enter');
-    // console.log('Game : renderCreateExample : state : '+JSON.stringify(state));
+
     return (
       <div className="game">   
         <Init 
@@ -1342,10 +1119,7 @@ const Game = () => {
   const renderCreateWithName = () => {
     // chose create, entered name, get size
     console.log('Game : renderCreateWithName : enter');
-    // console.log('Game : renderCreateWithName : state : '+JSON.stringify(state));
 
-    // let cword = cword;
-   //  selectedSize={ Util.SIZE_TITLE }
     return (
       <div className="game">   
         <Init 
@@ -1368,26 +1142,10 @@ const Game = () => {
     );
   }
 
-  // const renderMessage = () => {
-  //   console.log('Game : renderMessage : enter');
-  //   // console.log('Game : renderMessage : state : '+JSON.stringify(state));
-  //   return (
-  //     <div className="game"> 
-  //       <Message         
-  //         msg={ msg }
-  //         onClickMessageClose={ onClickMessageClose }
-  //       />
-  //     </div>
-  //   );
-  // }
-
   const renderSetupNew = () => {
     // chose create, entered name, chose size
     console.log('Game : renderSetupNew : enter');
-    // console.log('Game : renderSetupNew : state : '+JSON.stringify(state));
 
-    // let cword = state.cword;
-    // selectedAction={ Util.ACTION_TITLE }
     return (
       <div className="game"> 
         <Init 
@@ -1417,8 +1175,6 @@ const Game = () => {
     // chose update, entered name
     console.log('Game : renderUpdateWithName : enter');
 
-    // let cword = state.cword;
-    // selectedAction={ Util.ACTION_TITLE }
     return (
       <div className="game"> 
         <Init 
@@ -1448,8 +1204,6 @@ const Game = () => {
     // chose export, entered name
     console.log('Game : renderExportWithName : enter');
 
-    // let cword = state.cword;
-    // selectedAction={ Util.ACTION_TITLE }
     return (
       <div className="game"> 
         <Init 
@@ -1475,16 +1229,11 @@ const Game = () => {
   const renderPlayWithName = () => {
     // chose play and name
     console.log('Game : renderPlayWithName : enter');
-    // console.log('Game : renderPlay : state : '+JSON.stringify(state));
 
-    // let cword = state.cword;
-    // let updateTimestamp = state.updateTimestamp;
-    // selectedAction={ Util.ACTION_TITLE }
     return (
       <div className="game"> 
         <Init 
-          action=''
-          
+          action=''        
           existingNames={ existingNames }
           onChangeAction={ onChangeAction }
         />
@@ -1511,7 +1260,6 @@ const Game = () => {
   const renderPlay = () => {
     // chose play
     console.log('Game : renderPlay : enter');
-    // console.log('Game : renderPlay : state : '+JSON.stringify(state));
 
     return (
       <div className="game"> 
@@ -1533,7 +1281,6 @@ const Game = () => {
   const renderDelete = () => {
     // chose delete
     console.log('Game : renderDelete : enter');
-    // console.log('Game : renderDelete : state : '+JSON.stringify(state));
 
     return (
       <div className="game"> 
@@ -1555,7 +1302,6 @@ const Game = () => {
   const renderUpdate = () => {
     // chose update
     console.log('Game : renderUpdate : enter');
-    // console.log('Game : renderUpdate : state : '+JSON.stringify(state));
 
     return (
       <div className="game"> 
@@ -1577,7 +1323,6 @@ const Game = () => {
   const renderExport = () => {
     // chose export
     console.log('Game : renderExport : enter');
-    // console.log('Game : renderExport : state : '+JSON.stringify(state));
 
     return (
       <div className="game"> 
@@ -1599,7 +1344,6 @@ const Game = () => {
   const renderImport = () => {
     // chose import
     console.log('Game : renderImport : enter');
-    // console.log('Game : renderImport : state : '+JSON.stringify(state));
 
     return (
       <div className="game"> 
@@ -1627,13 +1371,12 @@ const Game = () => {
   const renderMessageAfterAction = () => {
     // chose delete / createExample
     console.log('Game : renderMessageAfterAction : enter');
-    // console.log('Game : renderMessageAfterAction : state : '+JSON.stringify(state));
 
     let name = '';
     if (cword != null) {
       name = cword.name;
     }
-     // selectedAction={Util.ACTION_TITLE}
+
     return (
       <div className="game"> 
         <Init 
@@ -1654,7 +1397,7 @@ const Game = () => {
 
   const renderInit = () => {
     console.log('Game : renderInit : enter');
-    // console.log('Game : renderInit : state : '+JSON.stringify(state));
+
     return (
       <div className="game">   
         <Init 
@@ -1668,15 +1411,11 @@ const Game = () => {
       </div>
     );
   }
-    
-  // let action = state.action;
 
   let name = '';
   let size = '';
   let nameValid = false;
   let nameExists = false;
-  // let cword = state.cword;
-  // let existingNames = state.existingNames;
   if (cword != null) {
     name = cword.name;
     size = cword.size;
@@ -1684,8 +1423,6 @@ const Game = () => {
     nameExists = Util.isDuplicateName(existingNames, name);
   }
   
-  
-
   console.log('Game : START : -------------------------------------------->');
   console.log('Game : START : render ------------------------------------->');
   console.log('Game : START : ------- action : '+action+' ------------------------------------->');
@@ -1780,10 +1517,7 @@ const Game = () => {
     return renderInit();        
   }   
 
-
-}
-// });
-
+});
 
 export default Game;
 
